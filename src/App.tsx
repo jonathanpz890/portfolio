@@ -1,59 +1,52 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react';
+import 'swiper/css';
 import './App.css';
 import { Intro } from './components';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Mousewheel, Pagination, EffectCreative } from "swiper";
-import { SwiperEvents } from 'swiper/types';
+import { About } from './components/About';
+import { Experience } from './components/Experience';
+import { Navbar } from './components/Navbar/Navbar';
+import { Projects } from './components/Projects';
+import { Box } from '@mui/material';
 
 const App = () => {
     const [deformIntro, setDeformIntro] = useState(false)
-    const swiperScroll = (s: any) => {
-        const index = s.realIndex;
-        const prevIndex = s.previousRealIndex;
-        if (index === 1 && prevIndex === 0) {
-            setDeformIntro(true)
-        } else if (index === 0 && prevIndex === 1) {
-            setDeformIntro(false)
-        }
-    }
+    const [experienceAnimate, setExperienceAnimate] = useState(false)
+
+    const aboutRef = useRef<HTMLElement>();
+    const experienceRef = useRef<HTMLElement>();
+    const projectsRef = useRef<HTMLElement>();
 
     return (
         <>
-            {/* <Intro /> */}
-            <Swiper
+            <Navbar
+                refs={{
+                    aboutRef,
+                    experienceRef,
+                    projectsRef
+                }}
+            />
+            <Intro deformIntro={deformIntro} />
+            <Box
                 style={{
-                    width: '100vw',
-                    height: '100vh'
+                    // scrollMarginTop: 50
                 }}
-                effect={"creative"}
-                creativeEffect={{
-                    prev: {
-                        shadow: true,
-                        translate: [0, '-20', -1],
-                    },
-                    next: {
-                        shadow: true,
-                        translate: [0, '100%', 0],
-                    },
-                }}
-                direction={"vertical"}
-                slidesPerView={1}
-                speed={800}
-                mousewheel={true}
-                pagination={{
-                    clickable: true,
-                }}
-                modules={[Mousewheel, EffectCreative]}
-                className="mySwiper"
-                onScroll={(s) => swiperScroll(s)}
+                ref={aboutRef}
             >
-                <SwiperSlide>
-                    <Intro deformIntro={deformIntro}/>
-                </SwiperSlide>
-                <SwiperSlide style={{ background: 'red', height: '100vh' }}>Slide 2</SwiperSlide>
-                <SwiperSlide style={{ background: 'blue', height: '100vh' }}>Slide 3</SwiperSlide>
-                <SwiperSlide style={{ background: 'green', height: '100vh' }}>Slide 4</SwiperSlide>
-            </Swiper>
+                <About />
+            </Box>
+            <Box
+                ref={experienceRef}
+            >
+                <Experience />
+            </Box>
+            <Box
+                style={{
+                    scrollMarginTop: 75
+                }}
+                ref={projectsRef}
+            >
+                <Projects />
+            </Box>
         </>
     );
 }

@@ -1,4 +1,4 @@
 export interface TyperProps {
-    value: string;
+    value: string | string[];
     delay?: number;
 }

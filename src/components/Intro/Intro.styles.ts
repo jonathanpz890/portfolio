@@ -5,7 +5,8 @@ export const useStyles = ({
     deformIntro
 }: StyleProps) => ({
     intro: {
-        position: 'absolute',
+        top: 0,
+        zIndex: -1,
         width: '100vw',
         height: '100vh',
         display: 'flex',
@@ -14,6 +15,7 @@ export const useStyles = ({
         alignItems: 'center',
         filter: deformIntro ? 'blur(10px)' : '',
         transition: 'background 1s, filter 0.7s',
+        textAlign: 'center'
     },
     introBackground: {
         background: `linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(${Background})`,
@@ -27,12 +29,12 @@ export const useStyles = ({
         opacity: initiated ? 1 : 0,
     },
     introContent: {
-        top: '10vh',
-        display: 'flex',
+        top: '20vh',
         width: '100%',
+        maxWidth: '1600px',
         position: 'relative',
-        transform: deformIntro ? 'scale(0.7)' : '',
-        transition: 'transform 0.7s',
+        transform: deformIntro ? 'scale(0.5) translateY(-100vh)' : '',
+        transition: 'transform 1s',
         transformOrigin: 'center top'
     },
     introTitle: {
@@ -45,15 +47,12 @@ export const useStyles = ({
         padding: '0 5vw'
     },
     introTitleText: {
-        fontFamily: 'monospace, sans-serif',
+        // fontFamily: 'monospace, sans-serif',
         width: `${introTextWidth}%`,
         transition: 'width 1s',
+        fontWeight: '600'
     },
     introMac: {
-        paddingTop: {
-            md: '20vh',
-            xl: '40vh'
-        },
         position: 'absolute',
         right: initiated ? 0 : '-100%',
         top: '50%',

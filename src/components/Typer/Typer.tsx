@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { TyperProps } from '.'
+import { TyperProps, useStyle } from '.'
+import { Box } from '@mui/material'
 
 export const Typer = ({
     value,
-    delay = 0
+    delay = 0,
 }: TyperProps) => {
     const [typedValue, setTypedValue] = useState('')
     const [running, setRunning] = useState(false)
     const [cursorVisibility, setCursorVisibility] = useState(delay ? false : true)
     const [delayStart, setDelayStart] = useState(delay ? true : false)
+
+    const style = useStyle();
 
     useEffect(() => {
         if (delay) {
@@ -23,13 +26,13 @@ export const Typer = ({
             setTimeout(() => {
                 const newValue = typedValue + value[typedValue.length]
                 setTypedValue(newValue);
-            }, 100)
+            }, 50)
         } else {
             setRunning(false)
         }
     }, [typedValue, running, delayStart])
     useEffect(() => {
-        let interval: NodeJS.Timer;
+        let interval: string | number | NodeJS.Timeout | undefined;
 
         if (running) {
             interval = setInterval(() => {
@@ -45,9 +48,9 @@ export const Typer = ({
         };
     }, [running]);
     return (
-        <>
+        <Box sx={style.typer}>
             {typedValue}
             <span style={{ visibility: cursorVisibility ? 'visible' : 'hidden' }}>|</span>
-        </>
+        </Box>
     )
 }
