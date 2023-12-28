@@ -12,9 +12,9 @@ import Bango4 from '../../assets/project-card-images/bango4.png'
 import PortfolioIcon from '../../assets/icons/portfolio.png'
 import Portfolio1 from '../../assets/project-card-images/portfolio1.png'
 import Portfolio2 from '../../assets/project-card-images/portfolio2.png'
-import ReactDeviceDisplayIcon from '../../assets/icons/react-device-display.png'
-import ReactDeviceDisplay1 from '../../assets/project-card-images/react-device-display1.png'
-import ReactDeviceDisplay2 from '../../assets/project-card-images/react-device-display2.png'
+import ReactElectronixIcon from '../../assets/icons/react-electronix.png'
+import ReactElectronix1 from '../../assets/project-card-images/react-electronix1.png'
+import ReactElectronix2 from '../../assets/project-card-images/react-electronix2.png'
 import MenuMapperIcon from '../../assets/icons/menu-mapper.png'
 import ReactMechanixUIIcons from '../../assets/icons/react-mechanix-ui.png'
 import ReactDynamixIcon from '../../assets/icons/react-dynamix.png'
@@ -51,11 +51,11 @@ export const Projects = () => {
         },
         {
             id: '4',
-            title: 'React device display',
-            subtitle: 'React Device Display is a React library designed to visually simulate the appearance of devices like iPhones and Macbooks (more in the future) within a React application in pure HTML(JSX) and CSS! It provides custom components that accurately represent these devices, designed with high percision to replicate the device realisticly, complete with adjustable properties such as dimensions and animations. And running off of pure HTML&CSS only means no image loading time. The library includes the Mac component, which mimics a Macbook with customizable features like open/closed state, startup animation, etc. The Iphone component, allows for width adjustment and screen content display as well. Ideal for developers looking to add device-specific UI elements to their React projects, this library is available under the MIT License and can be easily installed via npm.',
-            url: 'https://www.npmjs.com/package/react-device-display',
-            icon: ReactDeviceDisplayIcon,
-            images: [ReactDeviceDisplay1, ReactDeviceDisplay2],
+            title: 'React ElectroniX',
+            subtitle: 'React ElectroniX is a React library designed to visually simulate the appearance of devices like iPhones and Macbooks (more in the future) within a React application in pure HTML(JSX) and CSS! It provides custom components that accurately represent these devices, designed with high percision to replicate the device realisticly, complete with adjustable properties such as dimensions and animations. And running off of pure HTML&CSS only means no image loading time. The library includes the Mac component, which mimics a Macbook with customizable features like open/closed state, startup animation, etc. The Iphone component, allows for width adjustment and screen content display as well. Ideal for developers looking to add device-specific UI elements to their React projects, this library is available under the MIT License and can be easily installed via npm.',
+            url: 'https://www.npmjs.com/package/react-electronix',
+            icon: ReactElectronixIcon,
+            images: [ReactElectronix1, ReactElectronix2],
             package: true
         },
         {
@@ -68,7 +68,7 @@ export const Projects = () => {
         },
         {
             id: '6',
-            title: 'ReactDynamiX - Animation library',
+            title: 'React DynamiX',
             subtitle: 'An animation library for react, fully packed with the best hooks for easy and fast animaitons. \nNot yet out, still working on it. \nComing out soon I hope :*',
             icon: ReactDynamixIcon,
             package: true,
@@ -86,15 +86,17 @@ export const Projects = () => {
     return (
         <Box
             sx={{
-                background: 'white'
+                background: 'white',
             }}
         >
             <Box sx={style.projects}>
-                <Typography variant='h3' fontWeight={600}>Projects</Typography>
-                <Box sx={style.projectContainer}>
-                    {projects.map(project => (
-                        <ProjectCard project={project} />
-                    ))}
+                <Box sx={style.sizeController}>
+                    <Typography variant='h3' fontWeight={600}>Projects</Typography>
+                    <Box sx={style.projectContainer}>
+                        {projects.map(project => (
+                            <ProjectCard project={project} />
+                        ))}
+                    </Box>
                 </Box>
             </Box>
         </Box >

@@ -26,6 +26,11 @@ root.render(
     </ThemeProvider>
 );
 
+window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'instant'
+})
 // During an update, there is no need to pass the container again
 root.render(
     <ThemeProvider theme={theme}>

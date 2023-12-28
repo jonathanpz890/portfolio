@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useStyles, AboutProps } from '.'
 import { Box, Typography } from '@mui/material'
-import { Iphone } from 'react-device-display'
+import { Iphone } from 'react-electronix'
 import { vwToPx } from '../../utils/vwToPx'
 import LinkedIn1 from '../../assets/linkedin1.png'
 import LinkedIn2 from '../../assets/linkedin2.png'

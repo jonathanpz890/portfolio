@@ -1,6 +1,7 @@
 const boxShadow = '0px 10px 20px #3979ad'
 export const useStyles = () => ({
     container: {
+        scrollMarginTop: 50,
         position: 'relative',
         minHeight: '100vh',
         backgroundColor: '#70a7ce',

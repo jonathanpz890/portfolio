@@ -81,7 +81,7 @@ export const Experience = () => {
                 <Box sx={style.skillContainer}>
                     <Typography variant='h3' fontWeight='600'>Tech Stack</Typography>
                     <Box
-                        style={{
+                        sx={{
                             position: 'sticky',
                             top: '12.5vh'
                         }}

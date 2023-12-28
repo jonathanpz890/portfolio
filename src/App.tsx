@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import 'swiper/css';
 import './App.css';
 import { Intro } from './components';
@@ -7,6 +7,7 @@ import { Experience } from './components/Experience';
 import { Navbar } from './components/Navbar/Navbar';
 import { Projects } from './components/Projects';
 import { Box } from '@mui/material';
+import { Footer } from './components/Footer/Footer';
 
 const App = () => {
     const [deformIntro, setDeformIntro] = useState(false)
@@ -16,6 +17,12 @@ const App = () => {
     const experienceRef = useRef<HTMLElement>();
     const projectsRef = useRef<HTMLElement>();
 
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+        })
+    }, [])
     return (
         <>
             <Navbar
@@ -27,7 +34,7 @@ const App = () => {
             />
             <Intro deformIntro={deformIntro} />
             <Box
-                style={{
+                sx={{
                     // scrollMarginTop: 50
                 }}
                 ref={aboutRef}
@@ -35,18 +42,26 @@ const App = () => {
                 <About />
             </Box>
             <Box
+                sx={{
+                    scrollMarginTop: '8vh'
+                }}
                 ref={experienceRef}
             >
                 <Experience />
             </Box>
             <Box
-                style={{
-                    scrollMarginTop: 75
+                sx={{
+                    scrollMarginTop: '9vh'
                 }}
                 ref={projectsRef}
             >
                 <Projects />
             </Box>
+            <Footer refs={{
+                aboutRef,
+                experienceRef,
+                projectsRef
+            }} />
         </>
     );
 }

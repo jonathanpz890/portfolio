@@ -4,7 +4,7 @@ import { IntroProps, useStyles } from '.';
 import { Typer } from '../Typer';
 import Background from '../../assets/background.jpg'
 import RunningCode from '../../assets/Running-code.mov'
-import { Mac } from 'react-device-display';
+import { Mac } from 'react-electronix';
 import ReactPlayer from 'react-player';
 import { vwToPx } from '../../utils/vwToPx';
 import { Mouse } from './components';
@@ -137,12 +137,14 @@ export const Intro = ({
                             sx={style.introMac}
                         >
                             <Mac
-                                // width={vwToPx(40, screenWidth)}
+                                // width={vwToPx(45, screenWidth)}
                                 width={600}
                                 animateOpen
                                 open={macOpen}
                                 startup
                                 openAngle={deformIntro ? 90 : scrollHeight * 300}
+                                //@ts-ignore
+                                perspective={120}
                             >
                                 <ReactPlayer
                                     url={RunningCode}
