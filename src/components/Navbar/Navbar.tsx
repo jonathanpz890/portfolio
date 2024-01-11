@@ -6,7 +6,7 @@ import { FiGithub } from "react-icons/fi";
 import { LuPhoneCall } from "react-icons/lu";
 import { TbBrandLinkedin } from "react-icons/tb";
 import { useScroll, animated } from '@react-spring/web';
-//@ts-expect-error
+//@ts-expect-error: This works fine
 import Resume from '../../assets/Resume.pdf'
 import { LuCloudSun } from "react-icons/lu";
 import { LuCloudMoon } from "react-icons/lu";
