@@ -34,8 +34,8 @@ export const useStyles = ({
     },
     skillContainer: {
         width: {
-            sm: '85vw',
-            md: '25vw'
+            sm: '85%',
+            md: '25%'
         },
         // margin: '10vh',
         display: 'flex',

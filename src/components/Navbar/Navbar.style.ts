@@ -7,6 +7,7 @@ export const useStyle = ({
 }) => ({
     navbar: {
         height: '7vh',
+        maxHeight: '60px',
         width: '100vw',
         zIndex: 10,
         position: 'fixed',

@@ -99,7 +99,9 @@ export const Projects = () => {
                         sx={{
                             transition: 'color 1s',
                             fontSize: {
-                                xs: '7vw'
+                                xs: '7vw',
+                                sm: '4vw',
+                                lg: '50px'
                             }
                         }}
                     >Projects</Typography>

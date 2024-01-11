@@ -50,7 +50,6 @@ export const Navbar = ({
                 style={{
                     backgroundColor: scrollYProgress.to(val => `rgba(${darkMode ? '12, 21, 27' : '255, 255, 255'}, ${val * ratio})`),
                     boxShadow: darkMode ? '' : scrollYProgress.to(val => `0 -5px ${(val * ratio * 20) > 20 ? 20 : val * ratio * 20}px #4a94d0`),
-                    transition: 'background-color 1s',
                     position: 'absolute',
                     width: '100%',
                     height: '100%',
