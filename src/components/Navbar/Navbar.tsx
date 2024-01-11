@@ -27,10 +27,6 @@ export const Navbar = ({
     const { darkMode, setDarkMode } = useContext(DarkModeContext);
     const mobile = useMediaQuery('(max-width: 700px)')
 
-    useEffect(() => {
-        console.log(mobile)
-    }, [mobile])
-
     const [navbarOpacity, setNavbarOpacity] = useState(0)
     const [initiated, setInitiated] = useState(false)
     const [ratio, setRatio] = useState(0)
