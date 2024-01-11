@@ -37,6 +37,10 @@ export const Footer = ({
                 ...style.footer,
                 position: 'sticky',
                 flexDirection: 'column-reverse',
+                pointerEvents: scrollY.to(val => {
+                    const equation = -(window.innerHeight * 3) + val
+                    return (equation > 1 ? 'auto' : equation < 0 ? 'none' : 'none')
+                }),
                 opacity: scrollY.to(val => {
                     const equation = -(window.innerHeight * 3) + val
                     return (equation > 1 ? 1 : equation < 0 ? 0 : equation)

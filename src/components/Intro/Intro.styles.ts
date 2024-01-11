@@ -33,7 +33,7 @@ export const useStyles = ({
     },
     introContent: {
         top: '7vh',
-        height: '93vh',
+        height: '70vh',
         width: '100%',
         maxWidth: '1600px',
         position: 'relative',
@@ -50,11 +50,11 @@ export const useStyles = ({
         width: '100%',
         height: '100%',
         rowGap: {
-            xs: initiated ? '52vw' : 5,
+            xs: initiated ? '55vw' : 5,
             sm: 10
         },
         padding: {
-            xs: '15vh 5vw',
+            xs: '1vw 5vw 0',
             sm: '0 5vw'
         },
         transition: 'color 10s, row-gap 1s',

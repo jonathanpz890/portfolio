@@ -30,7 +30,10 @@ export const useStyle = ({
         },
         justifyContent: '',
         alignItems: 'center',
-        padding: '0 10vh',
+        padding: {
+            xs: '0 7.5vw',
+            md: '0 10vh'
+        },
         columnGap: 20,
         rowGap: 5,
         '> *': {
@@ -48,6 +51,11 @@ export const useStyle = ({
 
     },
     rightBox: {
+        width: {
+            xs: '100%',
+
+        },
+        maxWidth: '500px',
         display: 'flex',
         flexDirection: 'column',
         padding: 5,
