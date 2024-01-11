@@ -1,5 +1,4 @@
-import { Box } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
 import { GiPineTree } from "react-icons/gi";
 import { DarkModeContext } from '../../../Context';
 
@@ -24,7 +23,7 @@ export const Tree = ({
         // This code will run only once when the component mounts
         const randomColor = treeColors[Math.floor(Math.random() * treeColors.length)];
         setColor(randomColor);
-    }, []); // Empty dependency array ensures this runs only on mount
+    }, [treeColors]); // Empty dependency array ensures this runs only on mount
 
 
     return (

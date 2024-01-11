@@ -1,11 +1,9 @@
-import { Box, Button, Drawer, Link, useMediaQuery } from '@mui/material';
-import React, { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from 'react';
+import { Box, Button, Link, useMediaQuery } from '@mui/material';
+import React, { useContext, useEffect, useState } from 'react';
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { useStyle } from './Navbar.style';
-import { CiLinkedin } from "react-icons/ci";
 import { FiGithub } from "react-icons/fi";
 import { LuPhoneCall } from "react-icons/lu";
-import { motion, useElementScroll, useMotionValueEvent, useTransform } from 'framer-motion';
 import { TbBrandLinkedin } from "react-icons/tb";
 import { useScroll, animated } from '@react-spring/web';
 //@ts-ignore
@@ -27,7 +25,7 @@ export const Navbar = ({
     const { darkMode, setDarkMode } = useContext(DarkModeContext);
     const mobile = useMediaQuery('(max-width: 700px)')
 
-    const [navbarOpacity, setNavbarOpacity] = useState(0)
+    const [navbarOpacity] = useState(0)
     const [initiated, setInitiated] = useState(false)
     const [ratio, setRatio] = useState(0)
     const style = useStyle({

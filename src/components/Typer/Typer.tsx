@@ -30,7 +30,7 @@ export const Typer = ({
         } else {
             setRunning(false)
         }
-    }, [typedValue, running, delayStart])
+    }, [typedValue, running, delayStart, value])
     useEffect(() => {
         let interval: string | number | NodeJS.Timeout | undefined;
 

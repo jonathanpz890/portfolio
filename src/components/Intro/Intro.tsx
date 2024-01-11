@@ -1,17 +1,16 @@
-import { Box, Typography } from '@mui/material';
-import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { IntroProps, useStyles } from '.';
-import { Typer } from '../Typer';
-import Background from '../../assets/background.jpg'
-import RunningCode from '../../assets/Running-code.mov'
+import { Box, Button, Typography } from '@mui/material';
+import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import React, { useContext, useEffect, useState } from 'react';
 import { Mac } from 'react-electronix';
 import ReactPlayer from 'react-player';
-import { vwToPx } from '../../utils/vwToPx';
-import { Mouse } from './components';
-import { motion, useMotionValueEvent, useScroll, useTransform, useViewportScroll } from 'framer-motion';
-import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
-import { Button } from '@mui/material';
+import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { IntroProps, useStyles } from '.';
 import { DarkModeContext } from '../../Context';
+import RunningCode from '../../assets/Running-code.mov';
+import Background from '../../assets/background.jpg';
+import { vwToPx } from '../../utils/vwToPx';
+import { Typer } from '../Typer';
+import { Mouse } from './components';
 
 
 
@@ -22,10 +21,9 @@ export const Intro = ({
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
     const [initiated, setInitiated] = useState<boolean>(false)
     const [introTextWidth, setIntroTextWidth] = useState<number>(100)
-    const [macWidth, setMacWidth] = useState<number>(0)
     const [macOpen, setMacOpen] = useState<boolean>(false)
     const [scrollHeight, setScrollHeight] = useState(0)
-    const [windowResized, setWindowResized] = useState(false)
+    const [windowResized] = useState(false)
 
     const style = useStyles({
         darkMode,

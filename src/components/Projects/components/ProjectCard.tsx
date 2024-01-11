@@ -1,12 +1,12 @@
 import { Box, Button, Typography } from '@mui/material';
-import React, { StyleHTMLAttributes, useContext, useEffect, useState } from 'react'
-import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { motion, useAnimationControls } from 'framer-motion'
+import { motion } from 'framer-motion';
+import React, { useContext, useState } from 'react';
 import Tilt from 'react-next-tilt';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper';
-import 'swiper/css/pagination';
+import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { Navigation, Pagination } from 'swiper';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { DarkModeContext } from '../../../Context';
 
 
@@ -173,6 +173,7 @@ export const ProjectCard = ({
                             >
 
                                 <img
+                                    alt='icon'
                                     src={project.icon}
                                     style={{
                                         width: '20%',
@@ -230,7 +231,7 @@ export const ProjectCard = ({
                                         >
                                             <img
                                                 src={image}
-                                                alt="image"
+                                                alt='projectpicture'
                                                 style={{
                                                     width: '90%'
                                                 }}

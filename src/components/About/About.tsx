@@ -1,17 +1,14 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { useStyles, AboutProps } from '.'
-import { Box, Typography } from '@mui/material'
+import { Box } from '@mui/material'
+import React, { useContext } from 'react'
 import { Iphone } from 'react-electronix'
-import { vwToPx } from '../../utils/vwToPx'
-import LinkedIn1 from '../../assets/linkedin1.png'
-import LinkedIn2 from '../../assets/linkedin2.png'
+import { useStyles } from '.'
+import { DarkModeContext } from '../../Context'
 import LinkedInBar from '../../assets/linkedInBar.jpg'
 import LinkedInButtons from '../../assets/linkedInButtons.jpg'
+import LinkedIn1 from '../../assets/linkedin1.png'
+import LinkedIn2 from '../../assets/linkedin2.png'
 import { iphoneVhToPx } from '../../utils/vhToPx'
-import { Typer } from '../Typer'
-import { IntroductionVideo } from '../IntroductionVideo/IntroductionVideo'
 import { WaveTransition } from '../WaveTransition/WaveTransition'
-import { DarkModeContext } from '../../Context'
 
 
 export const About = () => {
@@ -19,11 +16,7 @@ export const About = () => {
     const style = useStyles({
         darkMode
     })
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
-    useEffect(() => {
-        window.addEventListener('resize', () => setScreenWidth(window.innerWidth))
-    }, [])
     return (
         <Box
             sx={style.aboutContainer}

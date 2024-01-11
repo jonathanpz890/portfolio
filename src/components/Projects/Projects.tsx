@@ -1,30 +1,29 @@
-import { Box, Button, Typography } from '@mui/material'
-import React, { useContext, useState } from 'react'
-import { useStyles } from './Projects.style'
+import { Box, Typography } from '@mui/material'
+import React, { useContext } from 'react'
+import { DarkModeContext } from '../../Context'
 import ArchiveIcon from '../../assets/icons/archive.png'
+import BangoIcon from '../../assets/icons/bango.png'
+import MenuMapperIcon from '../../assets/icons/menu-mapper.png'
+import PortfolioIcon from '../../assets/icons/portfolio.png'
+import ReactDynamixIcon from '../../assets/icons/react-dynamix.png'
+import ReactElectronixIcon from '../../assets/icons/react-electronix.png'
+import ReactMechanixUIIcons from '../../assets/icons/react-mechanix-ui.png'
 import Archive1 from '../../assets/project-card-images/archive1.png'
 import Archive2 from '../../assets/project-card-images/archive2.png'
-import BangoIcon from '../../assets/icons/bango.png'
 import Bango1 from '../../assets/project-card-images/bango1.png'
 import Bango2 from '../../assets/project-card-images/bango2.png'
 import Bango3 from '../../assets/project-card-images/bango3.png'
 import Bango4 from '../../assets/project-card-images/bango4.png'
-import PortfolioIcon from '../../assets/icons/portfolio.png'
 import Portfolio1 from '../../assets/project-card-images/portfolio1.png'
 import Portfolio2 from '../../assets/project-card-images/portfolio2.png'
-import ReactElectronixIcon from '../../assets/icons/react-electronix.png'
 import ReactElectronix1 from '../../assets/project-card-images/react-electronix1.png'
 import ReactElectronix2 from '../../assets/project-card-images/react-electronix2.png'
-import MenuMapperIcon from '../../assets/icons/menu-mapper.png'
-import ReactMechanixUIIcons from '../../assets/icons/react-mechanix-ui.png'
-import ReactDynamixIcon from '../../assets/icons/react-dynamix.png'
+import { useStyles } from './Projects.style'
 import { ProjectCard } from './components/ProjectCard'
-import { DarkModeContext } from '../../Context'
 
 export const Projects = () => {
     const { darkMode } = useContext(DarkModeContext)
     const style = useStyles({ darkMode })
-    const [selectedProject, setSelectedProject] = useState({} as any)
 
     const projects = [
         {

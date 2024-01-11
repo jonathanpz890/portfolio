@@ -1,11 +1,11 @@
-import { Box, Typography } from '@mui/material'
-import React from 'react'
-import Plane1 from '../../../assets/planes/0c58_6smv_230308.png'
-import Plane2 from '../../../assets/planes/6sjh_4x55_220416.png'
-import Plane3 from '../../../assets/planes/d37h_3jt9_230308.png'
-import Plane4 from '../../../assets/planes/ft6b_mjm5_230308.png'
-import Plane5 from '../../../assets/planes/pf8t_iyno_230308.png'
-import Plane6 from '../../../assets/planes/ppgj_k1lf_220416.png'
+import { Box } from '@mui/material';
+import React from 'react';
+import Plane1 from '../../../assets/planes/0c58_6smv_230308.png';
+// import Plane2 from '../../../assets/planes/6sjh_4x55_220416.png'
+// import Plane3 from '../../../assets/planes/d37h_3jt9_230308.png'
+// import Plane4 from '../../../assets/planes/ft6b_mjm5_230308.png'
+// import Plane5 from '../../../assets/planes/pf8t_iyno_230308.png'
+// import Plane6 from '../../../assets/planes/ppgj_k1lf_220416.png'
 
 export const PlaneMessage = ({
     y,
@@ -16,6 +16,15 @@ export const PlaneMessage = ({
     rtl?: boolean;
     message?: string;
 }) => {
+    // const planes = [
+    //     Plane1,
+    //     Plane2,
+    //     Plane3,
+    //     Plane4,
+    //     Plane5,
+    //     Plane6,
+    // ]
+    // const plane = planes[Math.floor(Math.random() * 6)]
     return (
         <Box
             sx={{

@@ -1,16 +1,14 @@
-import { Box, List, ListItem, ListItemText, Typography, useMediaQuery } from '@mui/material'
-import React, { useContext, useEffect, useState } from 'react'
-import { useStyles } from './Experience.style'
+import { Box, List, ListItemText, Typography, useMediaQuery } from '@mui/material'
 import { motion } from 'framer-motion'
-import { ExperienceProps } from '.'
-import { SkiTransition } from '../SkiTransition/SkiTransition'
+import React, { useContext } from 'react'
 import { DarkModeContext } from '../../Context'
+import { SkiTransition } from '../SkiTransition/SkiTransition'
+import { useStyles } from './Experience.style'
 
 export const Experience = () => {
     const { darkMode } = useContext(DarkModeContext)
     const smallDevice = useMediaQuery('(max-width: 900px')
     const mobile = useMediaQuery('(max-width: 600px')
-    const [animate, setAnimate] = useState(false)
     const style = useStyles({ darkMode, smallDevice, mobile })
 
     const experience = [

@@ -1,18 +1,16 @@
-import { Box, Button, IconButton, Typography, useMediaQuery } from '@mui/material'
-import React, { useContext } from 'react'
-import { useStyle } from './Footer.style'
-import background from '../../assets/background.jpg';
-import { useScroll, animated } from '@react-spring/web';
-import { Mac } from 'react-electronix';
-import { vwToPx } from '../../utils/vwToPx';
-import { SocialButton } from './components/SocialButton';
 import { LocalPhone } from '@mui/icons-material';
+import { Box, Button, Typography, useMediaQuery } from '@mui/material';
+import { animated, useScroll } from '@react-spring/web';
+import React, { useContext } from 'react';
+import { FaFacebookF } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
 import { TbBrandGithubFilled } from "react-icons/tb";
 import { TfiLinkedin } from "react-icons/tfi";
-import { FaInstagram } from "react-icons/fa6";
-import { FaFacebookF } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
 import { DarkModeContext } from '../../Context';
+import background from '../../assets/background.jpg';
+import { useStyle } from './Footer.style';
+import { SocialButton } from './components/SocialButton';
 
 
 export const Footer = ({
@@ -31,7 +29,7 @@ export const Footer = ({
         darkMode,
         mobile
     })
-    const { scrollYProgress, scrollY } = useScroll();
+    const { scrollY } = useScroll();
 
     return (
         <animated.div

@@ -24,6 +24,7 @@ export const SocialButton = ({
             href={action}
             style={style.anchor}
             target='_blank'
+            rel="noreferrer"
         >
             <Button
                 sx={style.socialButton}

@@ -1,8 +1,8 @@
 import { Box } from '@mui/material'
-import React, { useContext, useEffect } from 'react'
-import { useStyle } from '.'
 import { motion } from 'framer-motion'
+import React, { useContext } from 'react'
 import { BsChevronDown } from 'react-icons/bs'
+import { useStyle } from '.'
 import { DarkModeContext } from '../../../Context'
 
 export const Mouse = ({initiated}: {initiated: boolean}) => {

@@ -1,16 +1,16 @@
+import { Box } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
 import 'swiper/css';
 import './App.css';
 import { Intro } from './components';
 import { About } from './components/About';
 import { Experience } from './components/Experience';
+import { Footer } from './components/Footer/Footer';
 import { Navbar } from './components/Navbar/Navbar';
 import { Projects } from './components/Projects';
-import { Box, ThemeProvider, createTheme } from '@mui/material';
-import { Footer } from './components/Footer/Footer';
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { initializeApp } from "firebase/app";
 import { DarkModeContext } from './Context';
 
 const App = () => {
@@ -31,11 +31,10 @@ const App = () => {
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
+    getAnalytics(app);
 
     const [darkMode, setDarkMode] = useState(false);
-    const [deformIntro, setDeformIntro] = useState(false)
-    const [experienceAnimate, setExperienceAnimate] = useState(false)
+    const [deformIntro] = useState(false)
 
     const aboutRef = useRef<HTMLElement>();
     const experienceRef = useRef<HTMLElement>();
