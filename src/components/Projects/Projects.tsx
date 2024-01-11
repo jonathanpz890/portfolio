@@ -104,8 +104,8 @@ export const Projects = () => {
                         }}
                     >Projects</Typography>
                     <Box sx={style.projectContainer}>
-                        {projects.map(project => (
-                            <ProjectCard project={project} />
+                        {projects.map((project, index) => (
+                            <ProjectCard project={project} key={index} />
                         ))}
                     </Box>
                 </Box>

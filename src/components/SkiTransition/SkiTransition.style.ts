@@ -1,10 +1,8 @@
 export const useStyle = ({ 
     screenWidth, 
-    scrollYProgress,
     darkMode
 }: { 
     screenWidth: number; 
-    scrollYProgress: number;
     darkMode: boolean;
 }) => ({
     skiTransition: {

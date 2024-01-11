@@ -149,8 +149,9 @@ export const Experience = () => {
                         Experience
                     </Typography>
                     {
-                        experience.map((exp) => (
+                        experience.map((exp, index) => (
                             <motion.div
+                                key={index}
                                 initial={{ scale: 1 }}
                             >
                                 <motion.div
@@ -233,8 +234,9 @@ export const Experience = () => {
                                         <List
                                             style={style.traitList}
                                         >
-                                            {exp.traits.map(trait => (
+                                            {exp.traits.map((trait, index) => (
                                                 <ListItemText
+                                                    key={index}
                                                     sx={{
                                                         '& span': {
                                                             fontSize: {

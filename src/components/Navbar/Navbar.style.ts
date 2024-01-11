@@ -1,10 +1,8 @@
 export const useStyle = ({ 
     darkMode,
-    navbarOpacity,
     initiated,
 }: {
     darkMode: boolean;
-    navbarOpacity: number;
     initiated: boolean;
 }) => ({
     navbar: {

@@ -30,10 +30,9 @@ export const SkiTransition = () => {
     const scrollDirection = useScrollDirection()
     const style = useStyle({
         screenWidth,
-        scrollYProgress: 0,
         darkMode
     })
-    const skiTransitionRef = useRef<HTMLElement>(null as any)
+    const skiTransitionRef = useRef<HTMLElement | null>(null)
     const { scrollYProgress } = useScroll({
         config: {
             tension: 0
@@ -44,7 +43,8 @@ export const SkiTransition = () => {
         window.addEventListener('resize', () => setScreenWidth(window.innerWidth))
     }, [])
     useEffect(() => {
-        const sky = skiTransitionRef.current.getBoundingClientRect();
+        const sky = skiTransitionRef?.current?.getBoundingClientRect();
+        if (!sky) { return }
         setOffsetTop((sky.top + window.scrollY) - window.innerHeight)
         const body = document.body;
         const html = document.documentElement;

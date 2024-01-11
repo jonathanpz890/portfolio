@@ -221,8 +221,9 @@ export const ProjectCard = ({
                                         width: '100%'
                                     }}
                                 >
-                                    {project.images?.map(image => (
+                                    {project.images?.map((image, index) => (
                                         <SwiperSlide
+                                            key={index}
                                             style={{
                                                 display: 'flex',
                                                 justifyContent: 'center',

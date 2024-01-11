@@ -6,7 +6,7 @@ import { FiGithub } from "react-icons/fi";
 import { LuPhoneCall } from "react-icons/lu";
 import { TbBrandLinkedin } from "react-icons/tb";
 import { useScroll, animated } from '@react-spring/web';
-//@ts-ignore
+//@ts-expect-error
 import Resume from '../../assets/Resume.pdf'
 import { LuCloudSun } from "react-icons/lu";
 import { LuCloudMoon } from "react-icons/lu";
@@ -25,12 +25,10 @@ export const Navbar = ({
     const { darkMode, setDarkMode } = useContext(DarkModeContext);
     const mobile = useMediaQuery('(max-width: 700px)')
 
-    const [navbarOpacity] = useState(0)
     const [initiated, setInitiated] = useState(false)
     const [ratio, setRatio] = useState(0)
     const style = useStyle({
         darkMode,
-        navbarOpacity,
         initiated
     })
     const { scrollYProgress } = useScroll()

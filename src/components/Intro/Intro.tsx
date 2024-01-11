@@ -55,10 +55,6 @@ export const Intro = ({
         })
     }, [])
     useEffect(() => {
-        if (deformIntro) {
-        }
-    }, [deformIntro])
-    useEffect(() => {
         setTimeout(() => {
             initiate();
         }, 3500)
