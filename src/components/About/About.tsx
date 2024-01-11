@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useStyles, AboutProps } from '.'
 import { Box, Typography } from '@mui/material'
 import { Iphone } from 'react-electronix'
@@ -11,10 +11,14 @@ import { iphoneVhToPx } from '../../utils/vhToPx'
 import { Typer } from '../Typer'
 import { IntroductionVideo } from '../IntroductionVideo/IntroductionVideo'
 import { WaveTransition } from '../WaveTransition/WaveTransition'
+import { DarkModeContext } from '../../Context'
 
 
 export const About = () => {
-    const style = useStyles()
+    const { darkMode } = useContext(DarkModeContext)
+    const style = useStyles({
+        darkMode
+    })
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
     useEffect(() => {
@@ -46,7 +50,7 @@ export const About = () => {
                 </Iphone>
                 {/* <IntroductionVideo /> */}
             </Box>
-            <WaveTransition />
+            <WaveTransition darkMode={darkMode} />
         </Box>
     )
 }

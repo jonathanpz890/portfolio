@@ -1,13 +1,24 @@
-export const useStyles = () => ({
+export const useStyles = ({
+    darkMode
+}: {
+    darkMode: boolean
+}) => ({
     aboutContainer: {
         width: '100%',
         minHeight: '100vh',
-        backgroundColor: '#cce0f0',
+        backgroundColor: darkMode ? '#315a75' : '#cce0f0',
+        transition: 'background-color 1s'
     },
     about: {
         maxWidth: '1600px',
         display: 'flex',
-        padding: '10vh',
+        justifyContent: {
+            xs: 'center'
+        },
+        padding: {
+            xs: '5vw',
+            sm: '10vh'
+        },
         columnGap: '2.5vh',
         margin: 'auto'
     },

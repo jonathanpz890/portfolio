@@ -1,5 +1,5 @@
-import { Box, Button, IconButton, Typography } from '@mui/material'
-import React from 'react'
+import { Box, Button, IconButton, Typography, useMediaQuery } from '@mui/material'
+import React, { useContext } from 'react'
 import { useStyle } from './Footer.style'
 import background from '../../assets/background.jpg';
 import { useScroll, animated } from '@react-spring/web';
@@ -12,10 +12,11 @@ import { TfiLinkedin } from "react-icons/tfi";
 import { FaInstagram } from "react-icons/fa6";
 import { FaFacebookF } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { DarkModeContext } from '../../Context';
 
 
 export const Footer = ({
-    refs
+    refs,
 }: {
     refs: {
         aboutRef: React.MutableRefObject<HTMLElement | undefined>;
@@ -23,8 +24,12 @@ export const Footer = ({
         projectsRef: React.MutableRefObject<HTMLElement | undefined>;
     }
 }) => {
+    const mobile = useMediaQuery('(max-width:  900px)')
+    const { darkMode } = useContext(DarkModeContext)
     const style = useStyle({
-        background
+        background,
+        darkMode,
+        mobile
     })
     const { scrollYProgress, scrollY } = useScroll();
 
@@ -55,27 +60,28 @@ export const Footer = ({
                         variant='h3'
                         textAlign={'center'}
                         fontWeight='500'
+                        color={darkMode ? '#eeeeee' : ''}
                     >Jonathan<br />Perez</Typography>
                     <Box
                         display='flex'
                         alignItems='center'
                     >
                         <Button
-                            style={{ color: 'black' }}
+                            style={style.anchorButton}
                             onClick={() => refs.aboutRef.current?.scrollIntoView({ behavior: 'smooth' })}
                         >
                             ABOUT
                         </Button>
                         •
                         <Button
-                            style={{ color: 'black' }}
+                            style={style.anchorButton}
                             onClick={() => refs.experienceRef.current?.scrollIntoView({ behavior: 'smooth' })}
                         >
                             EXPERIENCE
                         </Button>
                         •
                         <Button
-                            style={{ color: 'black' }}
+                            style={style.anchorButton}
                             onClick={() => refs.projectsRef.current?.scrollIntoView({ behavior: 'smooth' })}
                         >
                             PROJECTS
@@ -123,6 +129,17 @@ export const Footer = ({
                     />
                 </Box>
             </Box>
+            <Typography 
+                variant='body1'
+                sx={{
+                    width: '100%',
+                    textAlign: 'center',
+                    position: 'absolute',
+                    bottom: '0',
+                    left: '50%',
+                    transform: 'translateX(-50%)'
+                }}
+            >© {new Date().getFullYear()} Jonathan Perez. All Rights Reserved.</Typography>
         </animated.div>
     )
 }

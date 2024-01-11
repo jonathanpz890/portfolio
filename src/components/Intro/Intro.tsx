@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { IntroProps, useStyles } from '.';
 import { Typer } from '../Typer';
 import Background from '../../assets/background.jpg'
@@ -11,12 +11,14 @@ import { Mouse } from './components';
 import { motion, useMotionValueEvent, useScroll, useTransform, useViewportScroll } from 'framer-motion';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
 import { Button } from '@mui/material';
+import { DarkModeContext } from '../../Context';
 
 
 
 export const Intro = ({
     deformIntro
 }: IntroProps) => {
+    const { darkMode } = useContext(DarkModeContext)
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth)
     const [initiated, setInitiated] = useState<boolean>(false)
     const [introTextWidth, setIntroTextWidth] = useState<number>(100)
@@ -26,6 +28,7 @@ export const Intro = ({
     const [windowResized, setWindowResized] = useState(false)
 
     const style = useStyles({
+        darkMode,
         introTextWidth,
         Background,
         initiated,
@@ -77,6 +80,7 @@ export const Intro = ({
                 <Box sx={style.introContent}>
                     <motion.div
                         style={{
+                            height: '100%',
                             scale: 1 + (-scrollHeight / 2),
                             transformOrigin: 'center top'
                         }}
@@ -89,46 +93,10 @@ export const Intro = ({
                                 position={'relative'}
                             >
                                 <Typer value={'Jonathan Perez'} />
-                                {/* <motion.div
-                                    style={{
-                                        position: 'absolute',
-                                        top: '120px',
-                                        left: '300px',
-                                        transformOrigin: '50% 50%',
-                                        zIndex: 10,
-                                    }}
-                                    initial={{
-                                        rotate: 10,
-                                        scale: 100,
-                                        opacity: 0
-                                    }}
-                                    animate={{ 
-                                        transition: {
-                                            delay: 5,
-                                            duration: 0.2,
-                                            ease: 'linear'
-                                        },
-                                        opacity: 1,
-                                        scale: 1,
-                                    }}
-                                >
-                                    <span
-                                        style={{
-                                            border: '0.5rem solid',
-                                            borderLeft: 0,
-                                            borderRight: 0,
-                                            WebkitMaskImage: 'url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png)',
-                                            WebkitMaskSize: '944px 604px',
-                                            color: '#b32431',
-                                            lineHeight: 1
-                                        }}
-                                    >2.0</span>
-                                </motion.div> */}
                             </Typography>
                             <Typography
                                 variant='h2'
                                 sx={style.introTitleText}
-                                fontSize={60}
                             >
                                 <Typer value={'Web Developer'} delay={1500} />
                             </Typography>
@@ -137,14 +105,11 @@ export const Intro = ({
                             sx={style.introMac}
                         >
                             <Mac
-                                // width={vwToPx(45, screenWidth)}
-                                width={600}
+                                width={vwToPx(100, screenWidth) < 600 ? vwToPx(75, screenWidth) : vwToPx(50, screenWidth) > 600 ? 600 : vwToPx(50, screenWidth)}
                                 animateOpen
                                 open={macOpen}
                                 startup
-                                openAngle={deformIntro ? 90 : scrollHeight * 300}
-                                //@ts-ignore
-                                perspective={120}
+                                openAngle={deformIntro ? 90 : scrollHeight * 700}
                             >
                                 <ReactPlayer
                                     url={RunningCode}

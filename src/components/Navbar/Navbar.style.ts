@@ -1,7 +1,9 @@
 export const useStyle = ({ 
+    darkMode,
     navbarOpacity,
-    initiated
+    initiated,
 }: {
+    darkMode: boolean;
     navbarOpacity: number;
     initiated: boolean;
 }) => ({
@@ -24,8 +26,19 @@ export const useStyle = ({
         display: 'flex',
         columnGap: '10px',
 
-        '&:button': {
-            color: 'black !important'
+        '& button': {
+            transition: 'color 1s',
+            color: `${darkMode ? '#eeeeee' : '#000000'} !important`
         }
+    },
+    iconAnchor: {
+        width: {
+            xs: '15vw',
+            sm: 'unset'
+        }
+    },
+    iconButton: {
+        color: darkMode ? '#eeeeee' : '#000000' ,
+
     }
 })

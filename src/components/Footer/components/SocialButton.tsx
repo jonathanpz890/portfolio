@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from '@mui/material'
-import React from 'react'
+import React, { useContext } from 'react'
+import { DarkModeContext } from '../../../Context';
 
 export const SocialButton = ({
     text,
@@ -12,8 +13,10 @@ export const SocialButton = ({
     color: string;
     action: string;
 }) => {
+    const { darkMode } = useContext(DarkModeContext);
     const style = useStyle({
-        color
+        color,
+        darkMode
     })
 
     return (
@@ -41,9 +44,11 @@ export const SocialButton = ({
 }
 
 const useStyle = ({
-    color
+    color,
+    darkMode
 }: {
     color: string;
+    darkMode: boolean;
 }) => ({
     anchor: {
         textDecoration: 'none'
@@ -51,13 +56,13 @@ const useStyle = ({
     socialButton: {
         borderRadius: '100px',
         width: '100%',
-        backgroundColor: '#ffffff',
-        color: 'black',
+        backgroundColor: darkMode ? '#101f28' : '#ffffff',
+        color: darkMode ? '#eeeeee' : 'black',
         display: 'flex',
         columnGap: 1,
         padding: '5px 10px 5px 5px',
         '&:hover': {
-            background: '#eeeeee'
+            background: darkMode ? '#193849' : '#eeeeee'
         }
     },
     iconContainer: {

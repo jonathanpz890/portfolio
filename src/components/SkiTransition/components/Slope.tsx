@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
-import React from 'react'
+import React, { useContext } from 'react'
+import { DarkModeContext } from '../../../Context';
 
 export const Slope = ({
     position,
@@ -16,6 +17,7 @@ export const Slope = ({
     shadowShape?: string;
     rtl?: boolean;
 }) => {
+    const { darkMode } = useContext(DarkModeContext);
     const style = {
         slope: {
             display: 'flex',
@@ -28,7 +30,9 @@ export const Slope = ({
             width: `${screenWidth * (width / 20)}px`,
             height: `${screenWidth / 8 * (height / 4)}px`,
             background: '#D7EBFD',
-            zIndex: 2
+            zIndex: 2,
+            filter: darkMode ? 'brightness(30%)' : '',
+            transition: 'filter 1s'
         },
         shadow: {
             position: 'absolute',

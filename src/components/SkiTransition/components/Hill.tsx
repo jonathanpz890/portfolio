@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
-import React from 'react'
+import React, { useContext } from 'react'
+import { DarkModeContext } from '../../../Context';
 
 export const Hill = ({
     position,
@@ -14,6 +15,7 @@ export const Hill = ({
     screenWidth: number;
     shadowShape?: string;
 }) => {
+    const { darkMode } = useContext(DarkModeContext)
     const style = {
         hill: {
             display: 'flex',
@@ -26,7 +28,9 @@ export const Hill = ({
             width: `${screenWidth * (width / 10)}px`,
             height: `${screenWidth / 8 * (height / 2)}px`,
             background: '#B0D8FB',
-            zIndex: 2
+            zIndex: 2,
+            filter: darkMode ? 'brightness(30%)' : '',
+            transition: 'filter 1s'
         },
         shadow: {
             position: 'absolute',

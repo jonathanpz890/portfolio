@@ -1,5 +1,5 @@
 export const useStyle = () => ({
     typer: {
-        // display: 'flex'
+        transition: 'color 1s'
     }
 })

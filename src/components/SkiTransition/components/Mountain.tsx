@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
-import React from 'react'
+import React, { useContext } from 'react'
+import { DarkModeContext } from '../../../Context';
 
 export const Mountain = ({
     position,
@@ -18,6 +19,7 @@ export const Mountain = ({
     foreground?: boolean;
     halfForeground?: boolean;
 }) => {
+    const { darkMode } = useContext(DarkModeContext)
     const style = {
         mountain: {
             display: 'flex',
@@ -30,7 +32,9 @@ export const Mountain = ({
             left: `${position}%`,
             transform: 'translateX(-50%)',
             clipPath: 'polygon(50% 0, 0 100%, 100% 100%)',
-            zIndex: 1
+            zIndex: 1,
+            filter: darkMode ? 'brightness(30%)' : '',
+            transition: 'filter 1s'
         },
         topSnow: {
             width: '100%',

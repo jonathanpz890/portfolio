@@ -1,13 +1,17 @@
-import { Box, List, ListItem, ListItemText, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import { Box, List, ListItem, ListItemText, Typography, useMediaQuery } from '@mui/material'
+import React, { useContext, useEffect, useState } from 'react'
 import { useStyles } from './Experience.style'
 import { motion } from 'framer-motion'
 import { ExperienceProps } from '.'
 import { SkiTransition } from '../SkiTransition/SkiTransition'
+import { DarkModeContext } from '../../Context'
 
 export const Experience = () => {
+    const { darkMode } = useContext(DarkModeContext)
+    const smallDevice = useMediaQuery('(max-width: 900px')
+    const mobile = useMediaQuery('(max-width: 600px')
     const [animate, setAnimate] = useState(false)
-    const style = useStyles()
+    const style = useStyles({ darkMode, smallDevice, mobile })
 
     const experience = [
         {
@@ -79,7 +83,19 @@ export const Experience = () => {
         >
             <Box sx={style.contentContainer}>
                 <Box sx={style.skillContainer}>
-                    <Typography variant='h3' fontWeight='600'>Tech Stack</Typography>
+                    <Typography
+                        variant='h3'
+                        fontWeight='600'
+                        color={darkMode ? '#eeeeee' : ''}
+                        sx={{
+                            transition: 'color 1s',
+                            fontSize: {
+                                xs: '7vw',
+                                sm: '4vw',
+                                lg: '50px'
+                            }
+                        }}
+                    >Tech Stack</Typography>
                     <Box
                         sx={{
                             position: 'sticky',
@@ -122,53 +138,115 @@ export const Experience = () => {
                     <Typography
                         variant='h3'
                         fontWeight={600}
+                        color={darkMode ? '#eeeeee' : ''}
+                        sx={{
+                            transition: 'color 1s',
+                            fontSize: {
+                                xs: '7vw',
+                                sm: '4vw',
+                                lg: '50px'
+                            }
+                        }}
                     >
                         Experience
                     </Typography>
                     {
                         experience.map((exp) => (
                             <motion.div
-                                initial={{ scale: 1}}
-                                // whileInView={{ scale: 1.05}}
-                                // viewport={{ margin: '-50% 0px -50% 0px'}}
+                                initial={{ scale: 1 }}
                             >
                                 <motion.div
-                                    style={style.experienceItem}
+                                    style={{
+                                        ...style.experienceItem,
+                                        flexDirection: mobile ? 'column' : 'row',
+                                    }}
                                     initial={{ opacity: 0, x: -100 }}
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ margin: '-150px', once: true }}
                                 >
                                     <Box
-                                        width='30%'
+                                        sx={{
+                                            width: {
+                                                xs: '100%',
+                                                sm: '30%'
+                                            }
+                                        }}
                                     >
                                         <Typography
                                             variant='h6'
+                                            sx={{
+                                                fontSize: {
+                                                    xs: '4vw',
+                                                    sm: '2vw',
+                                                    lg: '20px'
+                                                }
+                                            }}
                                         >
                                             {`${exp.since} - ${exp.until}`}
                                         </Typography>
                                         <Typography
                                             variant='h5'
+                                            sx={{
+                                                fontSize: {
+                                                    xs: '4vw',
+                                                    sm: '2.25vw',
+                                                    lg: '25px'
+                                                }
+                                            }}
                                         >
                                             {exp.title}
                                         </Typography>
                                     </Box>
                                     <Box
-                                        width='2px'
-                                        height='100%'
-                                        style={{
+                                        sx={{
+                                            width: {
+                                                xs: '100%',
+                                                sm: '2px'
+                                            },
+                                            height: {
+                                                xs: '2px',
+                                                sm: '100%'
+                                            },
                                             background: 'black',
-                                            margin: '0 20px'
+                                            margin: {
+                                                xs: '1vw 0',
+                                                sm: '0 20px'
+                                            }
                                         }}
                                     />
                                     <Box
-                                        width='70%'
+                                        sx={{
+                                            width: {
+                                                xs: '100%',
+                                                sm: '70%'
+                                            }
+                                        }}
                                     >
-                                        <Typography variant='h5'>{exp.jobTitle}</Typography>
+                                        <Typography
+                                            variant='h5'
+                                            sx={{
+                                                fontSize: {
+                                                    xs: '3.5vw',
+                                                    sm: '2.25vw',
+                                                    lg: '25px'
+                                                }
+                                            }}
+                                        >{exp.jobTitle}</Typography>
                                         <List
                                             style={style.traitList}
                                         >
                                             {exp.traits.map(trait => (
-                                                <ListItemText>• {trait}</ListItemText>
+                                                <ListItemText
+                                                    sx={{
+                                                        '& span': {
+                                                            fontSize: {
+                                                                xs: '2.5vw',
+                                                                sm: '1.5vw',
+                                                                lg: '20px'
+                                                            }
+                                                        }
+                                                    }}
+                                                >• {trait}</ListItemText>
                                             ))}
                                         </List>
                                     </Box>
@@ -179,20 +257,6 @@ export const Experience = () => {
                 </Box>
             </Box>
             <SkiTransition />
-        </Box>
+        </Box >
     )
-}
-
-const noder = {
-    title: 'IDF Spokesperson Unit',
-    since: '2020',
-    until: '2021',
-    jobTitle: 'Full-Stack web developer',
-    traits: [
-        "Developed and maintained IDFSpokesperson's Archive Website",
-        "Worked on big projects for IDF's main website",
-        "Maintained a website for IDF's Infrastructure and Deployment Division",
-        "Worked with MongoDB",
-        "Worked with Microsoft Azure",
-    ]
 }

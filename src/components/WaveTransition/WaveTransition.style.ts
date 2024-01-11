@@ -4,7 +4,15 @@ export const useStyle = () => ({
     },
     wave: {
         width: '200vw',
-        height: '100%',
-        // filter: 'drop-shadow(0 -5px 10px)'
+        display: 'flex',
+        transition: 'background-color 1s',
+        position: 'relative',
     },
+    svg: {
+        width: '100%',
+        height: 'auto'
+    },
+    path: {
+        transition: 'fill 1s',
+    }
 })

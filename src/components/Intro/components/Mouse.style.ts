@@ -1,4 +1,10 @@
-export const useStyle = ({initiated}: {initiated: boolean}) => ({
+export const useStyle = ({
+    initiated,
+    darkMode
+}: {
+    initiated: boolean;
+    darkMode: boolean;
+}) => ({
     container: {
         display: 'flex',
         flexDirection: 'column',
@@ -11,16 +17,18 @@ export const useStyle = ({initiated}: {initiated: boolean}) => ({
         position: 'relative',
         width: '30px',
         height: '50px',
-        border: '3px solid black',
+        border: `3px solid`,
+        color:  darkMode ? '#eeeeee' : '#000000',
+        transition: 'color 1s',
         borderRadius: '100px',
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     mouseWheel: {
         width: '5px',
         height: '5px',
         borderRadius: '3px',
-        background: 'black',
-        transition: 'top 1s linear'
+        background: darkMode ? '#eeeeee' : '#000000',
+        transition: 'top 1s linear, color 1s'
     }
 })

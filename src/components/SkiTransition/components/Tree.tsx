@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { GiPineTree } from "react-icons/gi";
+import { DarkModeContext } from '../../../Context';
 
 export const Tree = ({
     x,
@@ -11,6 +12,7 @@ export const Tree = ({
     y: number
     size: number;
 }) => {
+    const { darkMode } = useContext(DarkModeContext)
     const [treeColors] = useState([
         '#9ab6f1',
         '#4F6CA1',
@@ -29,11 +31,13 @@ export const Tree = ({
         <GiPineTree
             color={color}
             size={`${size}vw`}
+            filter={darkMode ? 'brightness(30%)' : ''}
             style={{
                 zIndex: 2,
                 position: 'absolute',
                 left: `${x}vw`,
                 bottom: `${y}vw`,
+                transition: 'filter 1s'
             }}
         />
     )

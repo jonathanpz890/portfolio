@@ -6,11 +6,12 @@ import { About } from './components/About';
 import { Experience } from './components/Experience';
 import { Navbar } from './components/Navbar/Navbar';
 import { Projects } from './components/Projects';
-import { Box } from '@mui/material';
+import { Box, ThemeProvider, createTheme } from '@mui/material';
 import { Footer } from './components/Footer/Footer';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { DarkModeContext } from './Context';
 
 const App = () => {
     // TODO: Add SDKs for Firebase products that you want to use
@@ -32,7 +33,7 @@ const App = () => {
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
 
-
+    const [darkMode, setDarkMode] = useState(false);
     const [deformIntro, setDeformIntro] = useState(false)
     const [experienceAnimate, setExperienceAnimate] = useState(false)
 
@@ -41,13 +42,17 @@ const App = () => {
     const projectsRef = useRef<HTMLElement>();
 
     useEffect(() => {
-        window.scrollTo({
-            top: 0,
-            left: 0,
-        })
+        //TODO: bring back
+        // window.scrollTo({
+        //     top: 0,
+        //     left: 0,
+        // })
+    }, [])
+    useEffect(() => {
+        setDarkMode(localStorage.darkMode === 'true' ? true : false)
     }, [])
     return (
-        <>
+        <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
             <Navbar
                 refs={{
                     aboutRef,
@@ -55,7 +60,9 @@ const App = () => {
                     projectsRef
                 }}
             />
-            <Intro deformIntro={deformIntro} />
+            <Intro
+                deformIntro={deformIntro}
+            />
             <Box
                 sx={{
                     // scrollMarginTop: 50
@@ -80,12 +87,14 @@ const App = () => {
             >
                 <Projects />
             </Box>
-            <Footer refs={{
-                aboutRef,
-                experienceRef,
-                projectsRef
-            }} />
-        </>
+            <Footer
+                refs={{
+                    aboutRef,
+                    experienceRef,
+                    projectsRef
+                }}
+            />
+        </DarkModeContext.Provider>
     );
 }
 

@@ -1,11 +1,13 @@
 import { Box } from '@mui/material'
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useStyle } from '.'
 import { motion } from 'framer-motion'
 import { BsChevronDown } from 'react-icons/bs'
+import { DarkModeContext } from '../../../Context'
 
 export const Mouse = ({initiated}: {initiated: boolean}) => {
-    const style = useStyle({initiated})
+    const { darkMode } = useContext(DarkModeContext)
+    const style = useStyle({ initiated, darkMode })
 
     return (
         <motion.div
@@ -38,7 +40,11 @@ export const Mouse = ({initiated}: {initiated: boolean}) => {
                         duration: 2
                     }}
                 >
-                    <BsChevronDown style={{width: 30, height: 30}} />
+                    <BsChevronDown style={{
+                        width: 30, 
+                        height: 30,
+                        transition: 'color 1s'
+                    }} color={darkMode ? '#eeeeee' : '#000000'} />
                 </motion.div>
             </Box>
         </motion.div>

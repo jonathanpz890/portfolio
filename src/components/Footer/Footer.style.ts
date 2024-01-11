@@ -1,13 +1,17 @@
 export const useStyle = ({
-    background
+    background,
+    darkMode,
+    mobile
 }: {
     background: string;
+    darkMode: boolean;
+    mobile: boolean;
 }) => ({
     footer: {
         zIndex: 0,
-        height: '450px',
+        height: mobile ? '' : '450px',
         width: '100%',
-        background: `linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url(${background})`,        
+        background: `linear-gradient(rgba(${darkMode ? '0, 0, 0' : '255, 255, 255'}, 0.4), rgba(${darkMode ? '0, 0, 0' : '255, 255, 255'}, 0.4)), url(${background})`,        
         backgroundSize: '50%',
         bottom: 0,
         boxShadow: `
@@ -18,12 +22,17 @@ export const useStyle = ({
     },
     itemContainer: {
         width: '100%',
-        height: '450px',
+        height: mobile ? '' : '450px',
         display: 'flex',
+        flexDirection: {
+            xs: 'column',
+            md: 'row'
+        },
         justifyContent: '',
         alignItems: 'center',
         padding: '0 10vh',
         columnGap: 20,
+        rowGap: 5,
         '> *': {
             flex: 1
         }
@@ -41,6 +50,11 @@ export const useStyle = ({
     rightBox: {
         display: 'flex',
         flexDirection: 'column',
+        padding: 5,
         rowGap: 2
+    },
+    anchorButton: {
+        color: darkMode ? '#eeeeee' : 'black',
+        transition: 'color 1s'
     }
 })

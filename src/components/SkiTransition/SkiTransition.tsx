@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useStyle } from './SkiTransition.style'
 import { Mountain } from './components/Mountain'
 import { useScroll, animated, useSpring } from '@react-spring/web'
@@ -10,8 +10,10 @@ import { PlaneMessage } from './components/PlaneMessage'
 import { Skier } from './components/Skier'
 import { Skater } from './components/Skater'
 import { useScrollDirection } from '../../utils/useDetectScrollDirection'
+import { DarkModeContext } from '../../Context'
 
 export const SkiTransition = () => {
+    const { darkMode } = useContext(DarkModeContext)
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [screenScroll, setScreenScroll] = useState(window.innerWidth)
     const [offsetTop, setOffsetTop] = useState(0)
@@ -26,7 +28,11 @@ export const SkiTransition = () => {
     ])
 
     const scrollDirection = useScrollDirection()
-    const style = useStyle({ screenWidth, scrollYProgress: 0 })
+    const style = useStyle({
+        screenWidth,
+        scrollYProgress: 0,
+        darkMode
+    })
     const skiTransitionRef = useRef<HTMLElement>(null as any)
     const { scrollYProgress } = useScroll({
         config: {
@@ -71,29 +77,31 @@ export const SkiTransition = () => {
                     width={7.5}
                     shadowShape={'0% 0%, 0 100%, 50% 100%'}
                 />
-                <animated.div
-                    style={{
-                        position: 'absolute',
-                        width: '2vw',
-                        height: '2vw',
-                        transform: `rotate(13deg) ${scrollDirection === 'up' ? 'scaleX(-1)' : ''}`,
-                        left: scrollYProgress.to(val => {
-                            const y = -offsetTop + (val * (screenScroll - window.innerHeight))
-                            const vwRatio = (window.innerHeight + 50) / 20
-                            const finalRatio = y / vwRatio + 10;
-                            return `${finalRatio < 10 ? 10 : finalRatio > 50 ? 50 : finalRatio}vw`
-                        }),
-                        bottom: scrollYProgress.to(val => {
-                            const y = offsetTop - (val * (screenScroll - window.innerHeight))
-                            const vwRatio = (window.innerHeight + 50) / 5
-                            const finalRatio = y / vwRatio + 6.5;
-                            return `${finalRatio < 0 ? 0 : finalRatio > 6 ? 6 : finalRatio}vw`
-                        }),
-                        zIndex: 2
-                    }}
-                >
-                    <Skier index={2} />
-                </animated.div>
+                {!darkMode && (
+                    <animated.div
+                        style={{
+                            position: 'absolute',
+                            width: '2vw',
+                            height: '2vw',
+                            transform: `rotate(13deg) ${scrollDirection === 'up' ? 'scaleX(-1)' : ''}`,
+                            left: scrollYProgress.to(val => {
+                                const y = -offsetTop + (val * (screenScroll - window.innerHeight))
+                                const vwRatio = (window.innerHeight + 50) / 20
+                                const finalRatio = y / vwRatio + 10;
+                                return `${finalRatio < 10 ? 10 : finalRatio > 50 ? 50 : finalRatio}vw`
+                            }),
+                            bottom: scrollYProgress.to(val => {
+                                const y = offsetTop - (val * (screenScroll - window.innerHeight))
+                                const vwRatio = (window.innerHeight + 50) / 5
+                                const finalRatio = y / vwRatio + 6.5;
+                                return `${finalRatio < 0 ? 0 : finalRatio > 6 ? 6 : finalRatio}vw`
+                            }),
+                            zIndex: 2
+                        }}
+                    >
+                        <Skier index={2} />
+                    </animated.div>
+                )}
                 <Slope
                     rtl
                     height={3}
@@ -102,33 +110,35 @@ export const SkiTransition = () => {
                     width={3.5}
                     shadowShape={'0% 0%, 0 100%, 50% 100%'}
                 />
-                <animated.div
-                    style={{
-                        position: 'absolute',
-                        width: '2vw',
-                        height: '2vw',
-                        transform: scrollDirection === 'up' ? (
-                            'rotate(-8deg)'
-                        ) : (
-                            `rotate(-48deg) scaleX(-1)`
-                        ),
-                        left: scrollYProgress.to(val => {
-                            const y = offsetTop - (val * (screenScroll - window.innerHeight))
-                            const vwRatio = (window.innerHeight + 50) / 7
-                            const finalRatio = y / vwRatio + 98
-                            return `${finalRatio < 10 ? 10 : finalRatio > 98 ? 98 : finalRatio}vw`
-                        }),
-                        bottom: scrollYProgress.to(val => {
-                            const y = offsetTop - (val * (screenScroll - window.innerHeight))
-                            const vwRatio = (window.innerHeight + 50) / 3.675
-                            const finalRatio = y / vwRatio + 8.5;
-                            return `${finalRatio < 0 ? 0 : finalRatio > 8.5 ? 8.5 : finalRatio}vw`
-                        }),
-                        zIndex: 2
-                    }}
-                >
-                    <Skier index={4} />
-                </animated.div>
+                {!darkMode && (
+                    <animated.div
+                        style={{
+                            position: 'absolute',
+                            width: '2vw',
+                            height: '2vw',
+                            transform: scrollDirection === 'up' ? (
+                                'rotate(-8deg)'
+                            ) : (
+                                `rotate(-48deg) scaleX(-1)`
+                            ),
+                            left: scrollYProgress.to(val => {
+                                const y = offsetTop - (val * (screenScroll - window.innerHeight))
+                                const vwRatio = (window.innerHeight + 50) / 7
+                                const finalRatio = y / vwRatio + 98
+                                return `${finalRatio < 10 ? 10 : finalRatio > 98 ? 98 : finalRatio}vw`
+                            }),
+                            bottom: scrollYProgress.to(val => {
+                                const y = offsetTop - (val * (screenScroll - window.innerHeight))
+                                const vwRatio = (window.innerHeight + 50) / 3.675
+                                const finalRatio = y / vwRatio + 8.5;
+                                return `${finalRatio < 0 ? 0 : finalRatio > 8.5 ? 8.5 : finalRatio}vw`
+                            }),
+                            zIndex: 2
+                        }}
+                    >
+                        <Skier index={4} />
+                    </animated.div>
+                )}
                 <Hill
                     position={85}
                     width={1.5}
@@ -143,33 +153,35 @@ export const SkiTransition = () => {
                     screenWidth={screenWidth}
                     shadowShape={'50% 70% at 70% 35%'}
                 />
-                <animated.div
-                    style={{
-                        position: 'absolute',
-                        width: '2vw',
-                        height: '2vw',
-                        transform: scrollDirection === 'up' ? (
-                            'rotate(-50deg) scaleX(-1)'
+                {!darkMode && (
+                    <animated.div
+                        style={{
+                            position: 'absolute',
+                            width: '2vw',
+                            height: '2vw',
+                            transform: scrollDirection === 'up' ? (
+                                'rotate(-50deg) scaleX(-1)'
                             ) : (
-                            'rotate(-20deg)'
-                        ),
-                        left: scrollYProgress.to(val => {
-                            const y = offsetTop - (val * (screenScroll - window.innerHeight))
-                            const vwRatio = (window.innerHeight + 50) / 10
-                            const finalRatio = y / vwRatio + 70;
-                            return `${finalRatio < 40 ? 40 : finalRatio > 70 ? 70 : finalRatio}vw`
-                        }),
-                        bottom: scrollYProgress.to(val => {
-                            const y = offsetTop - (val * (screenScroll - window.innerHeight))
-                            const vwRatio = (window.innerHeight + 50) / 5
-                            const finalRatio = y / vwRatio + 7;
-                            return `${finalRatio < 0 ? 0 : finalRatio > 7 ? 7 : finalRatio}vw`
-                        }),
-                        zIndex: 2
-                    }}
-                >
-                    <Skier index={1} />
-                </animated.div>
+                                'rotate(-20deg)'
+                            ),
+                            left: scrollYProgress.to(val => {
+                                const y = offsetTop - (val * (screenScroll - window.innerHeight))
+                                const vwRatio = (window.innerHeight + 50) / 10
+                                const finalRatio = y / vwRatio + 70;
+                                return `${finalRatio < 40 ? 40 : finalRatio > 70 ? 70 : finalRatio}vw`
+                            }),
+                            bottom: scrollYProgress.to(val => {
+                                const y = offsetTop - (val * (screenScroll - window.innerHeight))
+                                const vwRatio = (window.innerHeight + 50) / 5
+                                const finalRatio = y / vwRatio + 7;
+                                return `${finalRatio < 0 ? 0 : finalRatio > 7 ? 7 : finalRatio}vw`
+                            }),
+                            zIndex: 2
+                        }}
+                    >
+                        <Skier index={1} />
+                    </animated.div>
+                )}
                 {/* Trees! */}
                 <Tree x={-3} y={-1} size={5} />
                 <Tree x={0} y={-1} size={3} />
@@ -242,56 +254,61 @@ export const SkiTransition = () => {
                     screenWidth={screenWidth}
                     shadowShape={'70% 70% at 70% 35%'}
                 />
-                <animated.div
-                    style={{
-                        position: 'absolute',
-                        width: '2vw',
-                        height: '2vw',
-                        transform: `rotate(20deg) ${scrollDirection === 'up' ? '' : 'scaleX(-1)'}`,
-                        left: scrollYProgress.to(val => {
-                            const y = -offsetTop + (val * (screenScroll - window.innerHeight))
-                            const vwRatio = (window.innerHeight + 50) / 5
-                            const finalRatio = y / vwRatio + 45;
-                            return `${finalRatio < 45 ? 45 : finalRatio > 60 ? 60 : finalRatio}vw`
-                        }),
-                        bottom: scrollYProgress.to(val => {
-                            const y = offsetTop - (val * (screenScroll - window.innerHeight))
-                            const vwRatio = (window.innerHeight + 50) / 2
-                            const finalRatio = y / vwRatio + 7;
-                            return `${finalRatio < 0 ? 0 : finalRatio > 7 ? 7 : finalRatio}vw`
-                        }),
-                        zIndex: 5
-                    }}
-                >
-                    <Skier index={0} />
-                </animated.div>
-                <animated.div
-                    style={{
-                        position: 'absolute',
-                        width: '2vw',
-                        height: '2vw',
-                        transform: scrollDirection === 'up' ? (
-                            'rotate(-20deg)'
-                        ) : (
-                            'rotate(-40deg) scaleX(-1)'
-                        ),
-                        left: scrollYProgress.to(val => {
-                            const y = offsetTop - (val * (screenScroll - window.innerHeight))
-                            const vwRatio = (window.innerHeight + 50) / 6
-                            const finalRatio = y / vwRatio + 35;
-                            return `${finalRatio < 10 ? 10 : finalRatio > 40 ? 40 : finalRatio}vw`
-                        }),
-                        bottom: scrollYProgress.to(val => {
-                            const y = offsetTop - (val * (screenScroll - window.innerHeight))
-                            const vwRatio = (window.innerHeight + 50) / 3
-                            const finalRatio = y / vwRatio + 5;
-                            return `${finalRatio < 0 ? 0 : finalRatio > 5 ? 5 : finalRatio}vw`
-                        }),
-                        zIndex: 5
-                    }}
-                >
-                    <Skier index={5} />
-                </animated.div>
+                {!darkMode && (
+                    <>
+                        <animated.div
+                            style={{
+                                position: 'absolute',
+                                width: '2vw',
+                                height: '2vw',
+                                transform: `rotate(20deg) ${scrollDirection === 'up' ? '' : 'scaleX(-1)'}`,
+                                left: scrollYProgress.to(val => {
+                                    const y = -offsetTop + (val * (screenScroll - window.innerHeight))
+                                    const vwRatio = (window.innerHeight + 50) / 5
+                                    const finalRatio = y / vwRatio + 45;
+                                    return `${finalRatio < 45 ? 45 : finalRatio > 60 ? 60 : finalRatio}vw`
+                                }),
+                                bottom: scrollYProgress.to(val => {
+                                    const y = offsetTop - (val * (screenScroll - window.innerHeight))
+                                    const vwRatio = (window.innerHeight + 50) / 2
+                                    const finalRatio = y / vwRatio + 7;
+                                    return `${finalRatio < 0 ? 0 : finalRatio > 7 ? 7 : finalRatio}vw`
+                                }),
+                                zIndex: 5
+                            }}
+                        >
+                            <Skier index={0} />
+                        </animated.div>
+                        <animated.div
+                            style={{
+                                position: 'absolute',
+                                width: '2vw',
+                                height: '2vw',
+                                transform: scrollDirection === 'up' ? (
+                                    'rotate(-20deg)'
+                                ) : (
+                                    'rotate(-40deg) scaleX(-1)'
+                                ),
+                                left: scrollYProgress.to(val => {
+                                    const y = offsetTop - (val * (screenScroll - window.innerHeight))
+                                    const vwRatio = (window.innerHeight + 50) / 6
+                                    const finalRatio = y / vwRatio + 35;
+                                    return `${finalRatio < 10 ? 10 : finalRatio > 40 ? 40 : finalRatio}vw`
+                                }),
+                                bottom: scrollYProgress.to(val => {
+                                    const y = offsetTop - (val * (screenScroll - window.innerHeight))
+                                    const vwRatio = (window.innerHeight + 50) / 3
+                                    const finalRatio = y / vwRatio + 5;
+                                    return `${finalRatio < 0 ? 0 : finalRatio > 5 ? 5 : finalRatio}vw`
+                                }),
+                                zIndex: 5
+                            }}
+                        >
+                            <Skier index={5} />
+                        </animated.div>
+                    </>
+                )}
+
                 {/* Mountains - from foreground to front */}
                 <Mountain
                     position={15}
@@ -357,102 +374,108 @@ export const SkiTransition = () => {
                     }}
 
                 >
-                    <PlaneMessage
-                        rtl={scrollDirection === 'up'}
-                        message={planeMessages[Math.floor(Math.random() * planeMessages.length)]}
-                        y={17}
-                    />
+                    {!darkMode && (
+                        <PlaneMessage
+                            rtl={scrollDirection === 'up'}
+                            message={planeMessages[Math.floor(Math.random() * planeMessages.length)]}
+                            y={17}
+                        />
+                    )}
                 </animated.div>
-                <animated.div
-                    style={{
-                        position: 'absolute',
-                        width: '1.5vw',
-                        height: '3vw',
-                        transform: scrollDirection === 'up' ? 'scaleX(-1)' : '',
-                        left: scrollYProgress.to(val => {
-                            const y = -offsetTop + (val * (screenScroll - window.innerHeight))
-                            const vwRatio = (window.innerHeight + 50) / 5
-                            const finalRatio = y / vwRatio + 80;
-                            return `${finalRatio < 80 ? 80 : finalRatio > 100 ? 100 : finalRatio}vw`
-                        }),
-                        bottom: '-2vw',
-                        zIndex: 5
-                    }}
-                >
-                    <Skater index={0} />
-                </animated.div>
-                <animated.div
-                    style={{
-                        position: 'absolute',
-                        width: '1.5vw',
-                        height: '3vw',
-                        transform: scrollDirection === 'up' ? '' : 'scaleX(-1)',
-                        left: scrollYProgress.to(val => {
-                            const y = offsetTop - (val * (screenScroll - window.innerHeight))
-                            const vwRatio = (window.innerHeight + 50) / 2
-                            const finalRatio = y / vwRatio + 80;
-                            return `${finalRatio > 80 ? 80 : finalRatio < 60 ? 60 : finalRatio}vw`
-                        }),
-                        bottom: '-2vw',
-                        zIndex: 5
-                    }}
-                >
-                    <Skater index={1} />
-                </animated.div>
-                <animated.div
-                    style={{
-                        position: 'absolute',
-                        width: '1.5vw',
-                        height: '3vw',
-                        transform: scrollDirection === 'up' ? '' : 'scaleX(-1)',
-                        left: scrollYProgress.to(val => {
-                            const y = offsetTop - (val * (screenScroll - window.innerHeight))
-                            const vwRatio = (window.innerHeight + 50) / 3
-                            const finalRatio = y / vwRatio + 90;
-                            return `${finalRatio > 90 ? 90 : finalRatio < 60 ? 60 : finalRatio}vw`
-                        }),
-                        bottom: '-3vw',
-                        zIndex: 5
-                    }}
-                >
-                    <Skater index={2} />
-                </animated.div>
-                <animated.div
-                    style={{
-                        position: 'absolute',
-                        width: '1.5vw',
-                        height: '3vw',
-                        transform: scrollDirection === 'up' ? '' : 'scaleX(-1)',
-                        left: scrollYProgress.to(val => {
-                            const y = offsetTop - (val * (screenScroll - window.innerHeight))
-                            const vwRatio = (window.innerHeight + 50) / 2
-                            const finalRatio = y / vwRatio + 80.5;
-                            return `${finalRatio > 80.5 ? 80.5 : finalRatio < 60 ? 60 : finalRatio}vw`
-                        }),
-                        bottom: '-2.5vw',
-                        zIndex: 5
-                    }}
-                >
-                    <Skater index={3} />
-                </animated.div>
-                <animated.div
-                    style={{
-                        position: 'absolute',
-                        width: '1.5vw',
-                        height: '3vw',
-                        transform: scrollDirection === 'up' ? 'scaleX(-1)' : '',
-                        left: scrollYProgress.to(val => {
-                            const y = -offsetTop + (val * (screenScroll - window.innerHeight))
-                            const vwRatio = (window.innerHeight + 50) / 2
-                            const finalRatio = y / vwRatio + 40;
-                            return `${finalRatio < 40 ? 40 : finalRatio > 60 ? 60 : finalRatio}vw`
-                        }),
-                        bottom: '-1.75vw',
-                        zIndex: 5
-                    }}
-                >
-                    <Skater index={2} />
-                </animated.div>
+                {!darkMode && (
+                    <>
+                        <animated.div
+                            style={{
+                                position: 'absolute',
+                                width: '1.5vw',
+                                height: '3vw',
+                                transform: scrollDirection === 'up' ? 'scaleX(-1)' : '',
+                                left: scrollYProgress.to(val => {
+                                    const y = -offsetTop + (val * (screenScroll - window.innerHeight))
+                                    const vwRatio = (window.innerHeight + 50) / 5
+                                    const finalRatio = y / vwRatio + 80;
+                                    return `${finalRatio < 80 ? 80 : finalRatio > 100 ? 100 : finalRatio}vw`
+                                }),
+                                bottom: '-2vw',
+                                zIndex: 5
+                            }}
+                        >
+                            <Skater index={0} />
+                        </animated.div>
+                        <animated.div
+                            style={{
+                                position: 'absolute',
+                                width: '1.5vw',
+                                height: '3vw',
+                                transform: scrollDirection === 'up' ? '' : 'scaleX(-1)',
+                                left: scrollYProgress.to(val => {
+                                    const y = offsetTop - (val * (screenScroll - window.innerHeight))
+                                    const vwRatio = (window.innerHeight + 50) / 2
+                                    const finalRatio = y / vwRatio + 80;
+                                    return `${finalRatio > 80 ? 80 : finalRatio < 60 ? 60 : finalRatio}vw`
+                                }),
+                                bottom: '-2vw',
+                                zIndex: 5
+                            }}
+                        >
+                            <Skater index={1} />
+                        </animated.div>
+                        <animated.div
+                            style={{
+                                position: 'absolute',
+                                width: '1.5vw',
+                                height: '3vw',
+                                transform: scrollDirection === 'up' ? '' : 'scaleX(-1)',
+                                left: scrollYProgress.to(val => {
+                                    const y = offsetTop - (val * (screenScroll - window.innerHeight))
+                                    const vwRatio = (window.innerHeight + 50) / 3
+                                    const finalRatio = y / vwRatio + 90;
+                                    return `${finalRatio > 90 ? 90 : finalRatio < 60 ? 60 : finalRatio}vw`
+                                }),
+                                bottom: '-3vw',
+                                zIndex: 5
+                            }}
+                        >
+                            <Skater index={2} />
+                        </animated.div>
+                        <animated.div
+                            style={{
+                                position: 'absolute',
+                                width: '1.5vw',
+                                height: '3vw',
+                                transform: scrollDirection === 'up' ? '' : 'scaleX(-1)',
+                                left: scrollYProgress.to(val => {
+                                    const y = offsetTop - (val * (screenScroll - window.innerHeight))
+                                    const vwRatio = (window.innerHeight + 50) / 2
+                                    const finalRatio = y / vwRatio + 80.5;
+                                    return `${finalRatio > 80.5 ? 80.5 : finalRatio < 60 ? 60 : finalRatio}vw`
+                                }),
+                                bottom: '-2.5vw',
+                                zIndex: 5
+                            }}
+                        >
+                            <Skater index={3} />
+                        </animated.div>
+                        <animated.div
+                            style={{
+                                position: 'absolute',
+                                width: '1.5vw',
+                                height: '3vw',
+                                transform: scrollDirection === 'up' ? 'scaleX(-1)' : '',
+                                left: scrollYProgress.to(val => {
+                                    const y = -offsetTop + (val * (screenScroll - window.innerHeight))
+                                    const vwRatio = (window.innerHeight + 50) / 2
+                                    const finalRatio = y / vwRatio + 40;
+                                    return `${finalRatio < 40 ? 40 : finalRatio > 60 ? 60 : finalRatio}vw`
+                                }),
+                                bottom: '-1.75vw',
+                                zIndex: 5
+                            }}
+                        >
+                            <Skater index={2} />
+                        </animated.div>
+                    </>
+                )}
             </Box>
             <Box sx={style.groundSnow}>
                 <Box sx={style.ice} />

@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useStyles } from './Projects.style'
 import ArchiveIcon from '../../assets/icons/archive.png'
 import Archive1 from '../../assets/project-card-images/archive1.png'
@@ -19,9 +19,11 @@ import MenuMapperIcon from '../../assets/icons/menu-mapper.png'
 import ReactMechanixUIIcons from '../../assets/icons/react-mechanix-ui.png'
 import ReactDynamixIcon from '../../assets/icons/react-dynamix.png'
 import { ProjectCard } from './components/ProjectCard'
+import { DarkModeContext } from '../../Context'
 
 export const Projects = () => {
-    const style = useStyles()
+    const { darkMode } = useContext(DarkModeContext)
+    const style = useStyles({ darkMode })
     const [selectedProject, setSelectedProject] = useState({} as any)
 
     const projects = [
@@ -86,12 +88,22 @@ export const Projects = () => {
     return (
         <Box
             sx={{
-                background: 'white',
+                background: darkMode ? 'black' : 'white',
             }}
         >
             <Box sx={style.projects}>
                 <Box sx={style.sizeController}>
-                    <Typography variant='h3' fontWeight={600}>Projects</Typography>
+                    <Typography 
+                        variant='h3' 
+                        fontWeight={600}
+                        color={darkMode ? '#eeeeee' : ''}
+                        sx={{
+                            transition: 'color 1s',
+                            fontSize: {
+                                xs: '7vw'
+                            }
+                        }}
+                    >Projects</Typography>
                     <Box sx={style.projectContainer}>
                         {projects.map(project => (
                             <ProjectCard project={project} />

@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
-import React, { StyleHTMLAttributes, useEffect, useState } from 'react'
+import React, { StyleHTMLAttributes, useContext, useEffect, useState } from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { motion, useAnimationControls } from 'framer-motion'
 import Tilt from 'react-next-tilt';
@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import { DarkModeContext } from '../../../Context';
 
 
 export const ProjectCard = ({
@@ -23,11 +24,11 @@ export const ProjectCard = ({
         comingSoon?: boolean;
     },
 }) => {
+    const { darkMode } = useContext(DarkModeContext);
     const [hovering, setHovering] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
 
-    const style = useStyle()
-
+    const style = useStyle({ darkMode })
 
     return (
         <Box sx={style.container}>
@@ -106,8 +107,24 @@ export const ProjectCard = ({
                             width: '100%'
                         }}
                     >
-                        <Typography fontSize={'1.8rem'}>{project.title}</Typography>
-                        <Typography fontSize={'1.2rem'}>{project.subtitle.split(' ').slice(0, 10).join(' ')}...</Typography>
+                        <Typography
+                            sx={{
+                                fontSize: {
+                                    xs: '4vw',
+                                    md: '2vw',
+                                    lg: '1.8rem'
+                                }
+                            }}
+                        >{project.title}</Typography>
+                        <Typography
+                            sx={{
+                                fontSize: {
+                                    xs: '2.5vw',
+                                    md: '1.5vw',
+                                    lg: '1.2rem'
+                                }
+                            }}
+                        >{project.subtitle.split(' ').slice(0, 10).join(' ')}...</Typography>
                     </Box>
                     <Box
                         style={{
@@ -127,12 +144,18 @@ export const ProjectCard = ({
                         </Button>
                     </Box>
                 </motion.div>
-                <Modal size='lg' isOpen={modalOpen} toggle={() => setModalOpen(v => !v)}>
+                <Modal
+                    size='lg'
+                    isOpen={modalOpen}
+                    toggle={() => setModalOpen(v => !v)}
+                >
                     <ModalHeader
                         toggle={() => setModalOpen(v => !v)}
                         style={{
+                            borderColor: darkMode ? 'rgb(7 17 23)' : '',
                             alignItems: 'flex-start',
-                            padding: '5%'
+                            padding: '5%',
+                            backgroundColor: darkMode ? '#101f28' : ''
                         }}
                     >
                         <Box
@@ -159,15 +182,22 @@ export const ProjectCard = ({
                                     }}
                                 />
                                 <Box>
-                                    <Typography variant={'h4'}>{project.title}{project.package ? ' (NPM Package)' : ''}</Typography>
-                                    <Typography variant={'subtitle1'}>{project.subtitle}</Typography>
+                                    <Typography 
+                                        variant={'h4'}
+                                        color={darkMode ? '#eeeeee' : ''}
+                                    >{project.title}{project.package ? ' (NPM Package)' : ''}</Typography>
+                                    <Typography 
+                                        variant={'subtitle1'}
+                                        color={darkMode ? '#eeeeee' : ''}
+                                    >{project.subtitle}</Typography>
                                 </Box>
                             </Box>
                         </Box>
                     </ModalHeader>
                     <ModalBody style={{
                         paddingRight: 0,
-                        paddingLeft: 0
+                        paddingLeft: 0,
+                        backgroundColor: darkMode ? '#101f28' : ''
                     }}>
                         {/* <hr style={{ width: '90%' }} /> */}
                         <Box
@@ -214,10 +244,14 @@ export const ProjectCard = ({
                     {!project.comingSoon && (
                         <ModalFooter
                             style={{
-                                background: '#eeeeee'
+                                background: darkMode ? '#315a75' : '#eeeeee',
+                                borderColor: darkMode ? 'rgb(7 17 23)' : ''
                             }}
                         >
                             <Button
+                                sx={{
+                                    color: darkMode ? '#eeeeee' : ''
+                                }}
                                 onClick={() => window.open(project.url, '_blank')}
                             >
                                 Visit {project.package ? 'Package' : 'Website'}
@@ -230,7 +264,7 @@ export const ProjectCard = ({
     )
 }
 
-const useStyle = () => ({
+const useStyle = ({ darkMode }: { darkMode: boolean; }) => ({
     container: {
         // width: '23%'
     },
@@ -248,7 +282,7 @@ const useStyle = () => ({
         borderRadius: '25px',
         perspective: '1000px',
         transformStyle: 'preserve-3d',
-        boxShadow: '0 0 30px rgb(131, 131, 131)'
+        boxShadow: `0 0 30px ${darkMode ? 'rgb(40, 40, 40)' : 'rgb(131, 131, 131)'}`
     },
     textContainer: {
         width: '100%',
@@ -269,6 +303,11 @@ const useStyle = () => ({
         margin: '10px auto',
         textAlign: 'center',
         display: 'flex',
+        fontSize: {
+            xs: '2vw',
+            md: '1vw',
+            lg: '1.2rem'
+        }
     }
 })
 

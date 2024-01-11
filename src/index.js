@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const theme = createTheme({
     typography: {
-        fontFamily: 'Rubik, sans-serif' 
+        fontFamily: 'Rubik, sans-serif',
     },
 });
 

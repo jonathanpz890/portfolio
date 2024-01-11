@@ -1,5 +1,5 @@
-import { Box, Button } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
+import { Box, Button, Drawer, Link, useMediaQuery } from '@mui/material';
+import React, { Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from 'react';
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { useStyle } from './Navbar.style';
 import { CiLinkedin } from "react-icons/ci";
@@ -10,6 +10,10 @@ import { TbBrandLinkedin } from "react-icons/tb";
 import { useScroll, animated } from '@react-spring/web';
 //@ts-ignore
 import Resume from '../../assets/Resume.pdf'
+import { LuCloudSun } from "react-icons/lu";
+import { LuCloudMoon } from "react-icons/lu";
+import { DarkModeContext } from '../../Context';
+
 
 export const Navbar = ({
     refs
@@ -20,10 +24,18 @@ export const Navbar = ({
         projectsRef: React.MutableRefObject<HTMLElement | undefined>;
     }
 }) => {
+    const { darkMode, setDarkMode } = useContext(DarkModeContext);
+    const mobile = useMediaQuery('(max-width: 700px)')
+
+    useEffect(() => {
+        console.log(mobile)
+    }, [mobile])
+
     const [navbarOpacity, setNavbarOpacity] = useState(0)
     const [initiated, setInitiated] = useState(false)
     const [ratio, setRatio] = useState(0)
     const style = useStyle({
+        darkMode,
         navbarOpacity,
         initiated
     })
@@ -44,8 +56,9 @@ export const Navbar = ({
         <Box sx={style.navbar}>
             <animated.div
                 style={{
-                    backgroundColor: scrollYProgress.to(val => `rgba(255, 255, 255, ${val * ratio})`),
-                    boxShadow: scrollYProgress.to(val => `0 -5px ${(val * ratio * 20) > 20 ? 20 : val * ratio * 20}px #4a94d0`),
+                    backgroundColor: scrollYProgress.to(val => `rgba(${darkMode ? '12, 21, 27' : '255, 255, 255'}, ${val * ratio})`),
+                    boxShadow: darkMode ? '' : scrollYProgress.to(val => `0 -5px ${(val * ratio * 20) > 20 ? 20 : val * ratio * 20}px #4a94d0`),
+                    transition: 'background-color 1s',
                     position: 'absolute',
                     width: '100%',
                     height: '100%',
@@ -61,56 +74,80 @@ export const Navbar = ({
                 display='flex'
                 justifyContent='space-between'
             >
-                <Box sx={style.anchors}>
-                    <Button
-                        style={{ color: 'black' }}
-                        onClick={() => refs.aboutRef.current?.scrollIntoView({ behavior: 'smooth' })}
-                    >About</Button>
-                    <Button
-                        style={{ color: 'black' }}
-                        onClick={() => refs.experienceRef.current?.scrollIntoView({ behavior: 'smooth' })}
-                    >Experience</Button>
-                    <Button
-                        style={{ color: 'black' }}
-                        onClick={() => refs.projectsRef.current?.scrollIntoView({ behavior: 'smooth', })}
-                    >Projects</Button>
-                </Box>
-                <Box>
-                    <a
+                {!mobile && (
+                    <Box sx={style.anchors}>
+                        <Button
+                            onClick={() => refs.aboutRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                        >About</Button>
+                        <Button
+                            onClick={() => refs.experienceRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                        >Experience</Button>
+                        <Button
+                            onClick={() => refs.projectsRef.current?.scrollIntoView({ behavior: 'smooth', })}
+                        >Projects</Button>
+                    </Box>
+                )}
+                <Box
+                    sx={{
+                        display: 'flex',
+                        width: mobile ? '100%' : 'unset',
+                        justifyContent: mobile ? 'space-between' : ''
+                    }}
+                >
+                    <Link
+                        sx={style.iconAnchor}
                         href={Resume}
                         download='Jonathan-Perez-resume'
                         target='_blank'
                         rel='noreferrer'
                     >
-                        <Button style={{ color: 'black' }}>
-                            <IoDocumentTextOutline size={30} />
+                        <Button style={style.iconButton}>
+                            <IoDocumentTextOutline size={mobile ? 20 : 30} />
                         </Button>
-                    </a>
-                    <a
+                    </Link>
+                    <Link
+                        sx={style.iconAnchor}
                         href='https://www.linkedin.com/in/jonathanpz'
                         target='_blank'
                     >
-                        <Button style={{ color: 'black' }}>
-                            <TbBrandLinkedin size={30} />
+                        <Button style={style.iconButton}>
+                            <TbBrandLinkedin size={mobile ? 20 : 30} />
                         </Button>
-                    </a>
-                    <a
+                    </Link>
+                    <Link
+                        sx={style.iconAnchor}
                         href='https://www.github.com/jonathanpz890'
                         target='_blank'
                     >
-                        <Button style={{ color: 'black' }}>
-                            <FiGithub size={30} />
+                        <Button style={style.iconButton}>
+                            <FiGithub size={mobile ? 20 : 30} />
                         </Button>
-                    </a>
-                    <a
+                    </Link>
+                    <Link
+                        sx={style.iconAnchor}
                         href='tel:+972508755548'
                     >
-                        <Button style={{ color: 'black' }}>
-                            <LuPhoneCall size={30} />
+                        <Button style={style.iconButton}>
+                            <LuPhoneCall size={mobile ? 20 : 30} />
                         </Button>
-                    </a>
+                    </Link>
+                    <Button
+                        style={style.iconButton}
+                        onClick={() => {
+                            setDarkMode(value => {
+                                localStorage.setItem('darkMode', `${!value}`)
+                                return !value
+                            })
+                        }}
+                    >
+                        {darkMode ? (
+                            <LuCloudSun size={mobile ? 20 : 30} />
+                        ) : (
+                            <LuCloudMoon size={mobile ? 20 : 30} />
+                        )}
+                    </Button>
                 </Box>
             </Box>
-        </Box>
+        </Box >
     )
 }
