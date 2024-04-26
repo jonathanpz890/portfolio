@@ -28,8 +28,8 @@ export const useStyles = ({
         margin: '0 auto',
         gap: 10,
         padding: {
-            xs: '0 7.5vw 7.5vw',
-            md: '0 10vh 10vh'
+            xs: '2vh 7.5vw 7.5vw',
+            md: '2vh 10vh 10vh'
         },
     },
     skillContainer: {

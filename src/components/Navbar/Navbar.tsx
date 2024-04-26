@@ -80,9 +80,9 @@ export const Navbar = ({
             >
                 {!mobile && (
                     <Box sx={style.anchors}>
-                        <Button
+                        {/* <Button
                             onClick={() => refs.aboutRef.current?.scrollIntoView({ behavior: 'smooth' })}
-                        >About</Button>
+                        >About</Button> */}
                         <Button
                             onClick={() => refs.experienceRef.current?.scrollIntoView({ behavior: 'smooth' })}
                         >Experience</Button>

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import 'swiper/css';
 import './App.css';
 import { Intro } from './components';
-import { About } from './components/About';
+// import { About } from './components/About';
 import { Experience } from './components/Experience';
 import { Footer } from './components/Footer/Footer';
 import { Navbar } from './components/Navbar/Navbar';
@@ -72,7 +72,8 @@ const App = () => {
             </Box> */}
             <Box
                 sx={{
-                    scrollMarginTop: '8vh'
+                    scrollMarginTop: '8vh',
+                    marginTop: '20px'
                 }}
                 ref={experienceRef}
             >
