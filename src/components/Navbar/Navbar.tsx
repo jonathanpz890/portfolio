@@ -11,7 +11,7 @@ import Resume from '../../assets/Resume.pdf'
 import { LuCloudSun } from "react-icons/lu";
 import { LuCloudMoon } from "react-icons/lu";
 import { DarkModeContext } from '../../Context';
-
+// import { Dynamic } from 'react-dynamix';
 
 export const Navbar = ({
     refs
@@ -46,6 +46,19 @@ export const Navbar = ({
 
     return (
         <Box sx={style.navbar}>
+            {/* <Dynamic
+                animate={{
+                    style: {
+                        backgroundColor: 'white',
+                        filter: 'noder',
+                        moreShit: 'works'
+                    },
+                    options: {
+                        timeDelay: 1000,
+                        duration: 3000
+                    },
+                }}
+            ></Dynamic> */}
             <animated.div
                 style={{
                     backgroundColor: scrollYProgress.to(val => `rgba(${darkMode ? '12, 21, 27' : '255, 255, 255'}, ${val * ratio})`),

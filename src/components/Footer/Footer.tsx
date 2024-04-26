@@ -53,7 +53,7 @@ export const Footer = ({
                 <Box
                     sx={style.leftBox}
                 >
-
+                    
                 </Box>
                 <Box
                     sx={style.middleBox}

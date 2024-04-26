@@ -18,13 +18,11 @@ export const SkiTransition = () => {
     const [screenScroll, setScreenScroll] = useState(window.innerWidth)
     const [offsetTop, setOffsetTop] = useState(0)
     const [planeMessages] = useState([
-        'ANIMATIONS!',
-        'MORE ANIMATIONS!',
-        'THIS IS MOSTLY CODE!',
+        'ANIMATIONS',
+        'MORE ANIMATIONS',
+        'THIS IS 99% CODE',
         'SCROLL ANIMATIONS ARE MY SPECIALTY',
-        'I MISSED A SNOWBOARDING TRIP :(',
-        'YOU SHOULD TRY DARK MODE',
-        'FIND ALL THE EASTER EGGS TO WIN A PRIZE!!'
+        'YOU SHOULD TRY DARK MODE'
     ])
 
     const scrollDirection = useScrollDirection()

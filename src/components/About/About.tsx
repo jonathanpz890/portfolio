@@ -41,6 +41,40 @@ export const About = () => {
                             {style.linkedInButtons} />
                     </Box>
                 </Iphone>
+                <Iphone width={iphoneVhToPx(90)}>
+                    <Box
+                        sx={style.iphoneContent}
+                    >
+                        <Box
+                            component='img'
+                            src={LinkedInBar}
+                            sx={style.linkedInBar}
+                        />
+                        <Box component='img' src={LinkedIn1} alt="linkedin1" width='100%' sx=
+                            {style.aboutTextContainer} />
+                        <Box component='img' src={LinkedIn2} alt="linkedin2" width='100%' sx=
+                            {style.aboutTextContainer} />
+                        <Box component='img' src={LinkedInButtons} alt="linkedinbuttons" sx=
+                            {style.linkedInButtons} />
+                    </Box>
+                </Iphone>
+                <Iphone width={iphoneVhToPx(90)}>
+                    <Box
+                        sx={style.iphoneContent}
+                    >
+                        <Box
+                            component='img'
+                            src={LinkedInBar}
+                            sx={style.linkedInBar}
+                        />
+                        <Box component='img' src={LinkedIn1} alt="linkedin1" width='100%' sx=
+                            {style.aboutTextContainer} />
+                        <Box component='img' src={LinkedIn2} alt="linkedin2" width='100%' sx=
+                            {style.aboutTextContainer} />
+                        <Box component='img' src={LinkedInButtons} alt="linkedinbuttons" sx=
+                            {style.linkedInButtons} />
+                    </Box>
+                </Iphone>
                 {/* <IntroductionVideo /> */}
             </Box>
             <WaveTransition darkMode={darkMode} />

@@ -62,14 +62,14 @@ const App = () => {
             <Intro
                 deformIntro={deformIntro}
             />
-            <Box
+            {/* <Box
                 sx={{
                     // scrollMarginTop: 50
                 }}
                 ref={aboutRef}
             >
                 <About />
-            </Box>
+            </Box> */}
             <Box
                 sx={{
                     scrollMarginTop: '8vh'
