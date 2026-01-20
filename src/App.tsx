@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import 'swiper/css';
 import './App.css';
 import { Intro } from './components';
-// import { About } from './components/About';
+import { About } from './components/About';
 import { Experience } from './components/Experience';
 import { Footer } from './components/Footer/Footer';
 import { Navbar } from './components/Navbar/Navbar';
@@ -12,6 +12,7 @@ import { Projects } from './components/Projects';
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { DarkModeContext } from './Context';
+import { WaveTransition } from './components/WaveTransition/WaveTransition';
 
 const App = () => {
     // TODO: Add SDKs for Firebase products that you want to use
@@ -62,18 +63,18 @@ const App = () => {
             <Intro
                 deformIntro={deformIntro}
             />
-            {/* <Box
+            <Box
                 sx={{
                     // scrollMarginTop: 50
                 }}
                 ref={aboutRef}
             >
                 <About />
-            </Box> */}
+                <WaveTransition darkMode={darkMode} />
+            </Box>
             <Box
                 sx={{
-                    scrollMarginTop: '8vh',
-                    marginTop: '20px'
+                    scrollMarginTop: '8vh'
                 }}
                 ref={experienceRef}
             >

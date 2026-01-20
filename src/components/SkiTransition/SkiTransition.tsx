@@ -21,7 +21,6 @@ export const SkiTransition = () => {
         'ANIMATIONS',
         'MORE ANIMATIONS',
         'THIS IS 99% CODE',
-        'SCROLL ANIMATIONS ARE MY SPECIALTY',
         'YOU SHOULD TRY DARK MODE'
     ])
 
